@@ -1,19 +1,22 @@
 
+//main buttons
 document.addEventListener('DOMContentLoaded', function() {
     
     setupNavigationButtons();
+    animateTitleText();
 
 })
-    
+
+//function for navigation buttons    
 function setupNavigationButtons() {
     const buttons = [
         { id: 'homeBtn', url: 'index.html' },
-        { id: 'blogBtn', url: 'blog.html' },
-        { id: 'portfolioBtn', url: 'portfolio.html' },
-        { id: 'documentBtn', url: 'document.html' },
+        { id: 'blogsBtn', url: 'blogposts.html' },
+        { id: 'recipesBtn', url: 'recipes.html' },
+        { id: 'dataBtn', url: 'data.html' },
         { id: 'profileBtn', url: 'profile.html' },
-        { id: 'essayBtn', url: 'essay.html' },
-        { id: 'recentBlogsBtn', url: 'blog.html' }
+        { id: 'designBtn', url: 'design.html' },
+        { id: 'theorysBtn', url: 'theory.html' }
     ];
     
     buttons.forEach(button => {
@@ -26,6 +29,7 @@ function setupNavigationButtons() {
     });
 }
 
+//D3.js function to animate the title text
 function animateTitleText() {
     d3.select("#title-text")
         .style("opacity", 0)

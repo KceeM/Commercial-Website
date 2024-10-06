@@ -40,3 +40,77 @@ header .logo img {
 header .logo {
     display: inline-block;
 }
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 40px 0;
+    width: 100%;
+}
+
+footer .container {
+    width: 100%; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+footer .footer-content {
+    font-size: 16px;
+}
+
+footer.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 40px 0;
+    text-align: center;
+    width: 100%;
+}
+
+footer .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+footer .footer-content {
+    font-size: 18px;
+    margin: 0;
+    font-family: 'Roboto';
+}
+
+footer .social-links {
+    list-style: none;
+    margin: 20px 0 0 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+footer .social-links li {
+    margin: 0 10px;
+}
+
+footer .social-links li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    font-family: 'Quicksand';
+}
+
+footer .social-links li a:hover {
+    text-decoration: underline;
+}
+
+
+@media (max-width: 768px) {
+
+    footer .social-links {
+        flex-direction: column;
+    }
+
+    footer .social-links li {
+        margin: 10px 0;
+    }
+}
