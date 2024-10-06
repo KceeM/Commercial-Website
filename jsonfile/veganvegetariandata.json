@@ -1,0 +1,234 @@
+[
+    {
+      "country": "Germany",
+      "vegans_percentage": 2,
+      "vegetarians_percentage": 10
+    },
+    {
+      "country": "France",
+      "vegans_percentage": 1.1,
+      "vegetarians_percentage": 5.2
+    },
+    {
+      "country": "India",
+      "vegans_percentage": 9,
+      "vegetarians_percentage": 39
+    },
+    {
+        "country": "China",
+        "vegans_percentage": 2,
+        "vegetarians_percentage": 14
+      },
+      {
+        "country": "Brazil",
+        "vegans_percentage": 1.5,
+        "vegetarians_percentage": 14
+      },
+      {
+        "country": "Mexico",
+        "vegans_percentage": 9,
+        "vegetarians_percentage": 19
+      },
+      {
+        "country": "United States",
+        "vegans_percentage": 1.5,
+        "vegetarians_percentage": 4.2
+      },
+      {
+        "country": "Japan",
+        "vegans_percentage": 2.7,
+        "vegetarians_percentage": 9
+      },
+      {
+        "country": "Vietnam",
+        "vegans_percentage": null,
+        "vegetarians_percentage": 10
+      },
+      {
+        "country": "United Kingdom",
+        "vegans_percentage": 8,
+        "vegetarians_percentage": 2
+      },
+      {
+        "country": "Argentina",
+        "vegans_percentage": null,
+        "vegetarians_percentage": 12
+      },
+      {
+        "country": "Thailand",
+        "vegans_percentage": null,
+        "vegetarians_percentage": 8
+      },
+      {
+        "country": "Philippines",
+        "vegans_percentage": 2,
+        "vegetarians_percentage": 5
+      },
+      {
+        "country": "Italy",
+        "vegans_percentage": 3,
+        "vegetarians_percentage": 8.9
+      },
+      {
+        "country": "Taiwan",
+        "vegans_percentage": null,
+        "vegetarians_percentage": 14
+      },
+      {
+        "country": "Canada",
+        "vegans_percentage": 4.6,
+        "vegetarians_percentage": 7.6
+      },
+      {
+        "country": "Poland",
+        "vegans_percentage": 1.8,
+        "vegetarians_percentage": 8.4
+      },
+      {
+        "country": "Australia",
+        "vegans_percentage": 2,
+        "vegetarians_percentage": 12.1
+      },
+      {
+        "country": "Columbia",
+        "vegans_percentage": 2,
+        "vegetarians_percentage": 4
+      },
+      {
+        "country": "Ukraine",
+        "vegans_percentage": null,
+        "vegetarians_percentage": 5.2
+      },
+      {
+        "country": "Chile",
+        "vegans_percentage": null,
+        "vegetarians_percentage": 6
+      },
+      {
+        "country": "South Korea",
+        "vegans_percentage": null,
+        "vegetarians_percentage": 3
+      },
+      {
+        "country": "Russia",
+        "vegans_percentage": null,
+        "vegetarians_percentage": 1
+      },
+      {
+        "country": "Sweden",
+        "vegans_percentage": 4,
+        "vegetarians_percentage": 12
+      },
+      {
+        "country": "Israel",
+        "vegans_percentage": 13,
+        "vegetarians_percentage": 5
+      },
+      {
+        "country": "Austria",
+        "vegans_percentage": 11,
+        "vegetarians_percentage": 2
+      },
+      {
+        "country": "Netherlands",
+        "vegans_percentage": 1,
+        "vegetarians_percentage": 5
+      },
+      {
+        "country": "Belgium",
+        "vegans_percentage": 1,
+        "vegetarians_percentage": 7
+      },
+      {
+        "country": "Spain",
+        "vegans_percentage": 0.8,
+        "vegetarians_percentage": 1.4
+      },
+      {
+        "country": "Finland",
+        "vegans_percentage": 2,
+        "vegetarians_percentage": 12
+      },
+      {
+        "country": "Denmark",
+        "vegans_percentage": 4,
+        "vegetarians_percentage": 10
+      },
+      {
+        "country": "Czech Republic",
+        "vegans_percentage": 5,
+        "vegetarians_percentage": 1
+      },
+      {
+        "country": "New Zealand",
+        "vegans_percentage": null,
+        "vegetarians_percentage": 10
+      },
+      {
+        "country": "Norway",
+        "vegans_percentage": 4,
+        "vegetarians_percentage": 9
+      },
+      {
+        "country": "Hungary",
+        "vegans_percentage": 1,
+        "vegetarians_percentage": 5
+      },
+      {
+        "country": "Switzerland",
+        "vegans_percentage": 1,
+        "vegetarians_percentage": 5
+      },
+      {
+        "country": "Singapore",
+        "vegans_percentage": null,
+        "vegetarians_percentage": 7
+      },
+      {
+        "country": "Jamaica",
+        "vegans_percentage": null,
+        "vegetarians_percentage": 10
+      },
+      {
+        "country": "Lithuania",
+        "vegans_percentage": 1,
+        "vegetarians_percentage": 6
+      },
+      {
+        "country": "Ireland",
+        "vegans_percentage": 4.1,
+        "vegetarians_percentage": 8.4
+      },
+      {
+        "country": "Portugal",
+        "vegans_percentage": 0.6,
+        "vegetarians_percentage": 1.2
+      },
+      {
+        "country": "Latvia",
+        "vegans_percentage": 1,
+        "vegetarians_percentage": 5
+      },
+      {
+        "country": "Estonia",
+        "vegans_percentage": 1,
+        "vegetarians_percentage": 6
+      },
+      {
+        "country": "Slovenia",
+        "vegans_percentage": 0.5,
+        "vegetarians_percentage": 1.6
+      },
+      {
+        "country": "South Africa",
+        "vegans_percentage": 6,
+        "vegetarians_percentage": 16
+      },
+      {
+        "country": "Egypt",
+        "vegans_percentage": 6,
+        "vegetarians_percentage": 16
+      }
+
+      
+  ]

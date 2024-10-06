@@ -1,15 +1,15 @@
 /* background image */
-#intro-section {
+#beginning-section {
     position: relative;
     width: 100%;
     height: 500px; 
     background-image: url('../images/W2.jpg'); 
     background-size: cover;
     background-position: center;
-  }
+}
   
-  /* title*/
-  #title-text {
+/* title*/
+#title-text {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -22,15 +22,16 @@
          2px -2px 0 #000,  /*This shifts the shadow 2px to the top-right*/
         -2px  2px 0 #000, /*This shifts the shadow 2px to the bottom-left*/
          2px  2px 0 #000; /*This shifts the shadow 2px to the bottom-right*/
-  }
+}
 
-  /*body of the page*/
-  .intro-section {
+/*body of the page*/
+.intro-section {
     display: flex; 
     justify-content: center; 
     align-items: center; 
     text-align: center; 
-    
+    margin-top: 100px;
+    margin-bottom: 100px;
 }
 
 .intro-text {
@@ -43,14 +44,8 @@
 }
 
 .intro-image img {
-    max-width: 50%; 
+    max-width: 80%; 
     height: auto; 
 }
 
-@media (max-width: 768px) {
-    .intro-section {
-        flex-direction: column; /* Stack the text and image on small screens */
-        text-align: center;
-        gap: 20px;
-    }
-}
+

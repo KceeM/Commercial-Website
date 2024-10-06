@@ -1,0 +1,22 @@
+.intro-section {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    text-align: center; 
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.intro-text {
+    flex: 1; 
+    font-size: 2rem; /* Increase the font size here */
+    line-height: 1.5;
+    max-width: 600px;
+    padding-left: 50px;
+    
+}
+
+.intro-image img {
+    max-width: 80%; 
+    height: auto; 
+}
