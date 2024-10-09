@@ -5,14 +5,20 @@ document.addEventListener('DOMContentLoaded', function() {
     setupNavigationButtons();
     animateTitleText();
     setupReadMoreButtons();
+    
 
     const blogPosts = d3.selectAll('.blog-post');
 
-    //integration of the vegan vegetarian data and the Geojson data
-    d3.json("jsonfile/veganvegetariandata.json").then(function(data) {
-        d3.json("jsonfile/Countries.json").then(function(geoData) {
-            createMap(geoData, data); // data used for createMap function
-        });
+    //integration of the vegan vegetarian data and the svg data
+    d3.xml("map.svg").then(function(data) {
+        // Select the #map-container and append the loaded SVG
+        const svgElement = d3.select("#map-container").node().appendChild(data.documentElement);
+    
+        // Set the SVG's width and height to be responsive
+        svgElement.setAttribute("width", "100%"); 
+        svgElement.setAttribute("height", "auto");
+    
+        setupSVGInteractions(); // Call interactions after SVG is loaded
     });
 
     //slide down - blogs
@@ -115,35 +121,17 @@ function createMap(data) {
         .scale(150)
         .translate([width / 2, height / 1.5]);
 
-    const path = d3.geoPath().projection(projection);
+    const path = d3.geoPath().projection(projection);p
 
-    // GeoJSON data for world map
-    d3.json("jsonfile/veganvegetariandata.json").then(geoData => {
-        svg.selectAll("path")
-            .data(geoData.features)
-            .enter()
-            .append("path")
-            .attr("d", path)
-            .attr("fill", "lightgray")
-            .attr("stroke", "white")
-            .on("mouseover", function(event, d) {
-                const countryData = data.find(country => country.country === d.properties.name);
-                if (countryData) {
-                    d3.select(this)
-                        .attr("fill", "blue");
-                    const tooltip = svg.append("text")
-                        .attr("x", event.pageX)
-                        .attr("y", event.pageY)
-                        .attr("text-anchor", "middle")
-                        .attr("font-size", "16px")
-                        .attr("fill", "black")
-                        .text(`${d.properties.name}: ${countryData.vegans_percentage}% vegans, ${countryData.vegetarians_percentage}% vegetarians`);
-                }
-            })
-            .on("mouseout", function() {
-                d3.select(this)
-                    .attr("fill", "lightgray");
-                svg.selectAll("text").remove();
-            });
-    });
 }
+
+function setupSVGInteractions() {
+    // Select all paths inside the group with id "ne_10m_admin_0_countries"
+    d3.selectAll("#ne_10m_admin_0_countries path")
+        .on("mouseover", function(event, d) {
+            d3.select(this).attr("fill", "blue"); // Change color on hover
+        })
+        .on("mouseout", function() {
+            d3.select(this).attr("fill", "lightgray"); // Reset color on mouse out
+        });
+}           
