@@ -55,7 +55,7 @@ function createLineGraph(data) {
         .attr("class", "line vegans")
         .attr("d", lineVegans)
         .style("fill", "none")
-        .style("stroke", "steelblue")
+        .style("stroke", "greenyellow")
         .style("stroke-width", 2);
 
     svg.append("path")
@@ -69,7 +69,7 @@ function createLineGraph(data) {
 
 
 //tooltip functionality
-const tooltip = d3.select("#tooltip");
+const tooltip = d3.select("#tooltip1");
 
 svg.selectAll(".dot")
     .data(data)
