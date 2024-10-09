@@ -66,3 +66,52 @@ function createLineGraph(data) {
         .style("stroke", "orange")
         .style("stroke-width", 2);
 }
+
+
+//tooltip functionality
+const tooltip = d3.select("#tooltip");
+
+svg.selectAll(".dot")
+    .data(data)
+    .enter().append("circle")
+    .attr("class", "dot")
+    .attr("cx", d => x(d.country) + x.bandwidth() / 2)
+    .attr("cy", d => y(d.vegans_percentage))
+    .attr("r", 5)
+    .style("fill", "steelblue")
+    .on("mouseover", function(event, d) {
+        tooltip.style("visibility", "visible")
+            .html(`Vegans: ${d.vegans_percentage}%<br>Vegetarians: ${d.vegetarians_percentage}%`)
+            .style("top", (event.pageY - 10) + "px")
+            .style("left", (event.pageX + 10) + "px");
+    })
+    .on("mousemove", function(event) {
+        tooltip.style("top", (event.pageY - 10) + "px")
+            .style("left", (event.pageX + 10) + "px");
+    })
+    .on("mouseout", function() {
+        tooltip.style("visibility", "hidden");
+    });
+
+// Add dots for vegetarians as well
+svg.selectAll(".dot-vegetarians")
+    .data(data)
+    .enter().append("circle")
+    .attr("class", "dot-vegetarians")
+    .attr("cx", d => x(d.country) + x.bandwidth() / 2)
+    .attr("cy", d => y(d.vegetarians_percentage))
+    .attr("r", 5)
+    .style("fill", "orange")
+    .on("mouseover", function(event, d) {
+        tooltip.style("visibility", "visible")
+            .html(`Vegans: ${d.vegans_percentage}%<br>Vegetarians: ${d.vegetarians_percentage}%`)
+            .style("top", (event.pageY - 10) + "px")
+            .style("left", (event.pageX + 10) + "px");
+    })
+    .on("mousemove", function(event) {
+        tooltip.style("top", (event.pageY - 10) + "px")
+            .style("left", (event.pageX + 10) + "px");
+    })
+    .on("mouseout", function() {
+        tooltip.style("visibility", "hidden");
+    });
