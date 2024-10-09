@@ -11,14 +11,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //integration of the vegan vegetarian data and the svg data
     d3.xml("map.svg").then(function(data) {
-        // Select the #map-container and append the loaded SVG
+        
         const svgElement = d3.select("#map-container").node().appendChild(data.documentElement);
     
-        // Set the SVG's width and height to be responsive
+        // Set the SVG's width and height
         svgElement.setAttribute("width", "100%"); 
         svgElement.setAttribute("height", "auto");
     
-        setupSVGInteractions(); // Call interactions after SVG is loaded
+        setupSVGInteractions(); // functions for calling interactions after map is loaded
+
+        //adding the veganveg data to the map
+        d3.json("veganVegetarianData.json").then(function(veganData) {
+            updateMapWithData(veganData);
+        });
     });
 
     //slide down - blogs
@@ -124,6 +129,35 @@ function createMap(data) {
     const path = d3.geoPath().projection(projection);p
 
 }
+
+// Function to update the map with vegan/vegetarian data
+function updateMapWithData(data) {
+    data.forEach(function(d) {
+        
+        const countryElement = d3.select(`#${d.country.replace(/\s+/g, '')}`); //ID
+
+        // Check if the country data exists
+        if (countryElement.size() > 0) {
+            //fill color based on the vegan percentage
+            const fillColor = d.vegans_percentage > 5 ? "green" : "lightgreen";
+            countryElement.attr("fill", fillColor);
+
+            //mouseover function to show percentages
+            countryElement
+                .on("mouseover", function(event) {
+                    // Shows tooltip with vegan & vegetarian percentages
+                    tooltip.transition().duration(200).style("opacity", .9);
+                    tooltip.html(`Vegans: ${d.vegans_percentage}%<br>Vegetarians: ${d.vegetarians_percentage}%`)
+                        .style("left", (event.pageX + 5) + "px")
+                        .style("top", (event.pageY - 28) + "px");
+                })
+                .on("mouseout", function() {
+                    tooltip.transition().duration(500).style("opacity", 0);
+                });
+        }
+    });
+}
+
 
 function setupSVGInteractions() {
     // Select all paths inside the group with id "ne_10m_admin_0_countries"
