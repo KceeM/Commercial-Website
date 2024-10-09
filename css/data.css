@@ -36,12 +36,13 @@ svg {
 .tooltip {
     position: absolute;
     text-align: center;
-    width: 120px; 
-    padding: 5px;
+    width: 60px;
+    height: 28px;
+    padding: 2px;
     font: 12px sans-serif;
-    background: lightgrey; 
-    border: 0px;
+    background: lightsteelblue; 
+    border: 1px;
     border-radius: 8px;
     pointer-events: none; 
-    transition: opacity 0.2s; 
+    color:black
 }
