@@ -117,7 +117,7 @@ function animateTitleText() {
 }
 
 // Creating map visualization
-function createMap(data) {
+function createMap(geoData) {
     const width = 800;
     const height = 600;
 
@@ -126,41 +126,50 @@ function createMap(data) {
         .attr("width", width)
         .attr("height", height);
 
-    // Scale for positioning circles
+    
     const projection = d3.geoMercator()
         .scale(150)
         .translate([width / 2, height / 1.5]);
 
     const path = d3.geoPath().projection(projection);
 
-
-    // Create country paths 
-    svg.selectAll("path.country")
-        .data(data.features) 
+    
+    const countries = svg.selectAll("path.country")
+        .data(geoData.features)
         .enter()
         .append("path")
         .attr("class", "country")
-        .attr("d", path) 
-        .attr("id", d => d.properties.name.replace(/\s+/g, '')) 
-        .attr("fill", "lightgray") 
-        .attr("stroke", "white"); 
+        .attr("d", path)
+        .attr("id", d => d.properties.name.replace(/\s+/g, ''))
+        .attr("fill", "lightgray")
+        .attr("stroke", "white");
 
-    // Create country names
-    svg.selectAll("text.country-label")
-        .data(data.features) 
-        .enter()
-        .append("text")
-        .attr("class", "country-label")
-        .attr("x", d => projection(d3.geoCentroid(d))[0]) 
-        .attr("y", d => projection(d3.geoCentroid(d))[1]) 
-        .text(d => d.properties.name) 
-        .attr("font-size", "10px")
-        .attr("fill", "black")
-        .attr("text-anchor", "middle"); 
+    
+    const tooltip = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0)
+        .style("position", "absolute")
+        .style("background-color", "white")
+        .style("border", "1px solid #ccc")
+        .style("padding", "5px")
+        .style("font-size", "12px");
 
-     //Calling function to update map
-     updateMapWithData(data);
-
+    // Add hover functionality to display country names
+    countries
+        .on("mouseover", function(event, d) {
+            tooltip.transition().duration(200).style("opacity", .9);
+            tooltip.html(d.properties.name)
+                .style("left", (event.pageX + 10) + "px")
+                .style("top", (event.pageY - 28) + "px");
+        })
+        .on("mousemove", function(event) {
+            tooltip
+                .style("left", (event.pageX + 10) + "px")
+                .style("top", (event.pageY - 28) + "px");
+        })
+        .on("mouseout", function() {
+            tooltip.transition().duration(500).style("opacity", 0);
+        });
 }
 
 function updateMapWithData(data) {
@@ -197,6 +206,6 @@ function setupSVGInteractions() {
             d3.select(this).attr("fill", "blue"); // Change color on hover
         })
         .on("mouseout", function(event, d) {
-            d3.select(this).attr("fill", "lightgray"); // Revert back to original color on mouseout
+            d3.select(this).attr("fill", "black"); // Revert back to original color on mouseout
         });
 }
