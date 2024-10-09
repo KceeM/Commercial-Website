@@ -46,3 +46,22 @@ svg {
     pointer-events: none; 
     color:black
 }
+
+.line {
+    fill: none;
+}
+
+.vegans {
+    stroke: steelblue;
+    stroke-width: 2px;
+}
+
+.vegetarians {
+    stroke: orange;
+    stroke-width: 2px;
+}
+
+.x-axis path,
+.y-axis path {
+    display: none;
+}
