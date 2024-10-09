@@ -12,18 +12,20 @@ document.addEventListener('DOMContentLoaded', function() {
     //integration of the vegan vegetarian data and the svg data
     d3.xml("map.svg").then(function(data) {
         
-        const svgElement = d3.select("#map-container").node().appendChild(data.documentElement);
-        svg.attr("viewBox", `0 0 ${width} ${height}`);
+        const mapContainer = d3.select("#map-container");
+        const svgElement = mapContainer.node().appendChild(data.documentElement);
+        const svg = d3.select(svgElement);
         
-        // Set the SVG's width and height
-        svgElement.setAttribute("width", "100%"); 
-        svgElement.setAttribute("height", "600");
+        svg.attr("viewBox", "0 0 800 600")
+           .attr("width", "100%")
+           .attr("height", "600");
+        
 
         setupSVGInteractions();
 
         return d3.json("veganvegetariandata.json");
     }).then(function(veganData) {
-        updateMapWithData(veganData); // Only call this once veganData is defined
+        updateMapWithData(veganData); 
     }).catch(function(error) {
         console.error("Error loading SVG or JSON data:", error);
     });
