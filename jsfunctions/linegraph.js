@@ -41,30 +41,32 @@ function createLineGraph(data) {
 
     // Line generators for vegans and vegetarians
     const lineVegans = d3.line()
+        .defined(d => d.vegans_percentage !== null)
         .x(d => x(d.country) + x.bandwidth() / 2)
-        .y(d => y(d.vegans_percentage));
+        .y(d => y(d.vegans_percentage || 0));
 
     const lineVegetarians = d3.line()
+        .defined(d => d.vegetarians_percentage !== null)
         .x(d => x(d.country) + x.bandwidth() / 2)
-        .y(d => y(d.vegetarians_percentage));
+        .y(d => y(d.vegetarians_percentage || 0));
 
     // vegetarian lines first
     svg.append("path")
-    .datum(data)
-    .attr("class", "line vegetarians")
-    .attr("d", lineVegetarians)
-    .style("fill", "none")
-    .style("stroke", "orange")
-    .style("stroke-width", 2);
+       .datum(data)
+       .attr("class", "line vegetarians")
+       .attr("d", lineVegetarians)
+       .style("fill", "none")
+       .style("stroke", "orange")
+       .style("stroke-width", 2);
 
     //vegan lines 2nd
     svg.append("path")
-    .datum(data)
-    .attr("class", "line vegans")
-    .attr("d", lineVegans)
-    .style("fill", "none")
-    .style("stroke", "greenyellow")
-    .style("stroke-width", 2);
+       .datum(data)
+       .attr("class", "line vegans")
+       .attr("d", lineVegans)
+       .style("fill", "none")
+       .style("stroke", "greenyellow")
+       .style("stroke-width", 2);
 
     // Tooltip functionality for vegans and vegetarians
     const tooltip = d3.select("#tooltip1");
