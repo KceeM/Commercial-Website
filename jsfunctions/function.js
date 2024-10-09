@@ -135,25 +135,24 @@ function createMap(data) {
 
 // Function to update the map with vegan/vegetarian data
 function updateMapWithData(data) {
-    const tooltip = d3.select("body").append("div") // Create a tooltip div
-        .attr("class", "tooltip") // Add a class for styling
-        .style("opacity", 0); // Start invisible
+    const tooltip = d3.select("body").append("div") 
+        .attr("class", "tooltip") 
+        .style("opacity", 0); 
 
     data.forEach(function(d) {
-        // Assume your SVG paths have IDs that match the country names without spaces
-        const countryElement = d3.select(`#${d.country.replace(/\s+/g, '')}`); // Adjust ID if necessary
+        // Select country by ID
+        const countryElement = d3.select(`#${d.country.replace(/\s+/g, '')}`);
 
-        // Check if the country element exists
+        // Check country
         if (countryElement.size() > 0) {
             // Set the initial fill color based on the vegan percentage
-            const fillColor = d.vegans_percentage > 0 ? "lightgreen" : "lightgrey"; // Example color logic
+            const fillColor = d.vegans_percentage > 0 ? "lightgreen" : "lightgrey"; 
             countryElement.attr("fill", fillColor);
 
-            // Add mouseover functionality to show percentages for countries with data
+            // mouseover functionality for countries with data
             if (d.vegans_percentage > 0 || d.vegetarians_percentage > 0) {
                 countryElement
                     .on("mouseover", function(event) {
-                        // Show tooltip with country name and percentages
                         tooltip.transition().duration(200).style("opacity", .9);
                         tooltip.html(`${d.country}<br>Vegans: ${d.vegans_percentage}%<br>Vegetarians: ${d.vegetarians_percentage}%`)
                             .style("left", (event.pageX + 5) + "px")
@@ -170,14 +169,14 @@ function updateMapWithData(data) {
                 // Countries without data remain grey and non-interactive
                 countryElement
                     .attr("fill", "lightgray")
-                    .style("pointer-events", "none"); // Disable pointer events
+                    .style("pointer-events", "none"); 
             }
         }
     });
 }
 
 function setupSVGInteractions() {
-    // Select all paths inside the group with id "ne_10m_admin_0_countries"
+    
     d3.selectAll("#ne_10m_admin_0_countries path")
         .on("mouseover", function(event, d) {
             d3.select(this).attr("fill", "blue"); // Change color on hover
