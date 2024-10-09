@@ -141,7 +141,7 @@ function createMap(geoData) {
         .attr("class", "country")
         .attr("d", path)
         .attr("id", d => d.properties.name.replace(/\s+/g, ''))
-        .attr("fill", "lightgray")
+        .attr("fill", "black")
         .attr("stroke", "white");
 
     
@@ -149,7 +149,7 @@ function createMap(geoData) {
         .attr("class", "tooltip")
         .style("opacity", 0)
         .style("position", "absolute")
-        .style("background-color", "white")
+        .style("background-color", "blue")
         .style("border", "1px solid #ccc")
         .style("padding", "5px")
         .style("font-size", "12px");
