@@ -18,13 +18,12 @@ document.addEventListener('DOMContentLoaded', function() {
         // Set the SVG's width and height
         svgElement.setAttribute("width", "100%"); 
         svgElement.setAttribute("height", "600");
-    
-        setupSVGInteractions(); // functions for calling interactions after map is loaded
 
         //adding the veganveg data to the map
         d3.json("veganvegetariandata.json").then(function(veganData) {
             console.log(veganData);
             updateMapWithData(veganData);
+            setupSVGInteractions();
         });
     });
 
@@ -128,7 +127,32 @@ function createMap(data) {
         .scale(150)
         .translate([width / 2, height / 1.5]);
 
-    const path = d3.geoPath().projection(projection);p
+    const path = d3.geoPath().projection(projection);
+
+
+    // Create country paths 
+    svg.selectAll("path.country")
+        .data(data.features) 
+        .enter()
+        .append("path")
+        .attr("class", "country")
+        .attr("d", path) 
+        .attr("id", d => d.properties.name.replace(/\s+/g, '')) 
+        .attr("fill", "lightgray") 
+        .attr("stroke", "white"); 
+
+    // Create country names
+    svg.selectAll("text.country-label")
+        .data(data.features) 
+        .enter()
+        .append("text")
+        .attr("class", "country-label")
+        .attr("x", d => projection(d3.geoCentroid(d))[0]) 
+        .attr("y", d => projection(d3.geoCentroid(d))[1]) 
+        .text(d => d.properties.name) 
+        .attr("font-size", "10px")
+        .attr("fill", "black")
+        .attr("text-anchor", "middle"); 
 
      //Calling function to update map
      updateMapWithData(data);
