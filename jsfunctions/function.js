@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setupSVGInteractions(); // functions for calling interactions after map is loaded
 
         //adding the veganveg data to the map
-        d3.json("veganvegetariandata.json").then(function(veganData) {
+        d3.json("../jsonfile/veganvegetariandata.json").then(function(veganData) {
             updateMapWithData(veganData);
         });
     });
@@ -128,6 +128,9 @@ function createMap(data) {
 
     const path = d3.geoPath().projection(projection);p
 
+     //Calling function to update map
+     updateMapWithData(data);
+
 }
 
 // Function to update the map with vegan/vegetarian data
@@ -179,7 +182,4 @@ function setupSVGInteractions() {
         .on("mouseover", function(event, d) {
             d3.select(this).attr("fill", "blue"); // Change color on hover
         })
-        .on("mouseout", function() {
-            d3.select(this).attr("fill", "lightgray"); // Reset color on mouse out
-        });
 }           
