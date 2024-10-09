@@ -13,15 +13,17 @@ document.addEventListener('DOMContentLoaded', function() {
     d3.xml("map.svg").then(function(data) {
         
         const svgElement = d3.select("#map-container").node().appendChild(data.documentElement);
+        svgElement.setAttribute("viewBox", "0 0 width height");
     
         // Set the SVG's width and height
         svgElement.setAttribute("width", "100%"); 
-        svgElement.setAttribute("height", "auto");
+        svgElement.setAttribute("height", "600");
     
         setupSVGInteractions(); // functions for calling interactions after map is loaded
 
         //adding the veganveg data to the map
         d3.json("veganvegetariandata.json").then(function(veganData) {
+            console.log(veganData);
             updateMapWithData(veganData);
         });
     });
