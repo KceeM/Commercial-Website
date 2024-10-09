@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setupSVGInteractions(); // functions for calling interactions after map is loaded
 
         //adding the veganveg data to the map
-        d3.json(".../jsonfile/veganvegetariandata.json").then(function(veganData) {
+        d3.json("jsonfile/veganvegetariandata.json").then(function(veganData) {
             updateMapWithData(veganData);
         });
     });
