@@ -33,9 +33,7 @@ function createLineGraph(data) {
         .attr("class", "x-axis")
         .attr("transform", `translate(0, ${height})`)
         .call(d3.axisBottom(x))
-        .selectAll("text")
-        .attr("transform", "translate(-10,0)rotate(-45)")
-        .style("text-anchor", "end");
+        
 
     svg.append("g")
         .attr("class", "y-axis")
@@ -117,7 +115,7 @@ function createLineGraph(data) {
     svg.append("text")
         .attr("text-anchor", "middle")
         .attr("x", width / 2)
-        .attr("y", height + margin.bottom - 5) // Position below the axis
+        .attr("y", height + margin.bottom - 10) // Position below the axis
         .text("Countries")
         .style("font-size", "14px")
         .style("fill", "black");
