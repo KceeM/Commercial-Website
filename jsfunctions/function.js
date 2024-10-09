@@ -8,9 +8,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const blogPosts = d3.selectAll('.blog-post');
 
-    //create the map
-    d3.json("../jsonfile/veganvegetariandata.json").then(function(data) {
-        createMap(data);
+    //integration of the vegan vegetarian data and the Geojson data
+    d3.json("jsonfile/veganvegetariandata.json").then(function(data) {
+        d3.json("jsonfile/Countries.json").then(function(geoData) {
+            createMap(geoData, data); // data used for createMap function
+        });
     });
 
     //slide down - blogs
@@ -116,7 +118,7 @@ function createMap(data) {
     const path = d3.geoPath().projection(projection);
 
     // GeoJSON data for world map
-    d3.json("../jsonfile/veganvegetariandata.json").then(geoData => {
+    d3.json("jsonfile/veganvegetariandata.json").then(geoData => {
         svg.selectAll("path")
             .data(geoData.features)
             .enter()
