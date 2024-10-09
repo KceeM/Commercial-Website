@@ -9,25 +9,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const blogPosts = d3.selectAll('.blog-post');
 
-    //integration of the vegan vegetarian data and the svg data
-    d3.xml("map.svg").then(function(data) {
+    Promise.all([
+        d3.json("world-110m2.json"),  // TopoJSON file
+        d3.json("veganvegetariandata.json") // Vegan/Vegetarian data
+    ]).then(function([worldData, veganData]) {
         
         const mapContainer = d3.select("#map-container");
-        const svgElement = mapContainer.node().appendChild(data.documentElement);
-        const svg = d3.select(svgElement);
         
-        svg.attr("viewBox", "0 0 800 600")
-           .attr("width", "100%")
-           .attr("height", "600");
-        
+        // Create the map with TopoJSON
+        createMap(worldData, veganData);
 
-        setupSVGInteractions();
-
-        return d3.json("veganvegetariandata.json");
-    }).then(function(veganData) {
-        updateMapWithData(veganData); 
     }).catch(function(error) {
-        console.error("Error loading SVG or JSON data:", error);
+        console.error("Error loading TopoJSON or JSON data:", error);
     });
     
 
@@ -134,45 +127,25 @@ function createMap(geoData) {
     const path = d3.geoPath().projection(projection);
 
     
-    const countries = svg.selectAll("path.country")
-        .data(geoData.features)
+    // Convert TopoJSON to GeoJSON
+    const countries = topojson.feature(worldData, worldData.objects.countries).features;
+
+    // Draw the map using the converted GeoJSON
+    const countryPaths = svg.selectAll("path")
+        .data(countries)
         .enter()
         .append("path")
-        .attr("class", "country")
         .attr("d", path)
-        .attr("id", d => d.properties.name.replace(/\s+/g, ''))
-        .attr("fill", "black")
+        .attr("class", "country")
+        .attr("id", d => d.id)  // Country ID or name as an identifier
+        .attr("fill", "lightgray")
         .attr("stroke", "white");
 
-    
-    const tooltip = d3.select("body").append("div")
-        .attr("class", "tooltip")
-        .style("opacity", 0)
-        .style("position", "absolute")
-        .style("background-color", "blue")
-        .style("border", "1px solid #ccc")
-        .style("padding", "5px")
-        .style("font-size", "12px");
-
-    // Add hover functionality to display country names
-    countries
-        .on("mouseover", function(event, d) {
-            tooltip.transition().duration(200).style("opacity", .9);
-            tooltip.html(d.properties.name)
-                .style("left", (event.pageX + 10) + "px")
-                .style("top", (event.pageY - 28) + "px");
-        })
-        .on("mousemove", function(event) {
-            tooltip
-                .style("left", (event.pageX + 10) + "px")
-                .style("top", (event.pageY - 28) + "px");
-        })
-        .on("mouseout", function() {
-            tooltip.transition().duration(500).style("opacity", 0);
-        });
+    // Add vegan/vegetarian data to the map
+    updateMapWithData(countryPaths, veganData);
 }
 
-function updateMapWithData(data) {
+function updateMapWithData(countryPaths, data) {
     const tooltip = d3.select("body").append("div")
         .attr("class", "tooltip")
         .style("opacity", 0);
@@ -200,12 +173,3 @@ function updateMapWithData(data) {
     });
 }
 
-function setupSVGInteractions() {
-    d3.selectAll("#ne_10m_admin_0_countries path")
-        .on("mouseover", function(event, d) {
-            d3.select(this).attr("fill", "blue"); // Change color on hover
-        })
-        .on("mouseout", function(event, d) {
-            d3.select(this).attr("fill", "black"); // Revert back to original color on mouseout
-        });
-}
