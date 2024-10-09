@@ -131,21 +131,6 @@ function createLineGraph(data) {
         .text("Percentage Values")
         .style("font-size", "14px")
         .style("fill", "black");
-    //vertical grid lines
-    svg.append("g")			
-        .attr("class", "grid")
-        .attr("transform", `translate(0, ${height})`)
-        .call(d3.axisBottom(x)
-            .tickSize(-height)
-            .tickFormat('')
-        );
-    //horizontal grid lines
-    svg.append("g")			
-        .attr("class", "grid")
-        .call(d3.axisLeft(y)
-            .tickSize(-width)
-            .tickFormat('')
-        );
         
 
 }
