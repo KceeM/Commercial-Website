@@ -13,19 +13,21 @@ document.addEventListener('DOMContentLoaded', function() {
     d3.xml("map.svg").then(function(data) {
         
         const svgElement = d3.select("#map-container").node().appendChild(data.documentElement);
-        svgElement.setAttribute("viewBox", "0 0 width height");
-    
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+        
         // Set the SVG's width and height
         svgElement.setAttribute("width", "100%"); 
         svgElement.setAttribute("height", "600");
 
-        //adding the veganveg data to the map
-        d3.json("veganvegetariandata.json").then(function(veganData) {
-            console.log(veganData);
-            updateMapWithData(veganData);
-            setupSVGInteractions();
-        });
+        setupSVGInteractions();
+
+        return d3.json("veganvegetariandata.json");
+    }).then(function(veganData) {
+        updateMapWithData(veganData); // Only call this once veganData is defined
+    }).catch(function(error) {
+        console.error("Error loading SVG or JSON data:", error);
     });
+    
 
     //slide down - blogs
     blogPosts.style("opacity", 0) 
@@ -189,13 +191,10 @@ function updateMapWithData(data) {
 
 function setupSVGInteractions() {
     d3.selectAll("#ne_10m_admin_0_countries path")
-        .on("mouseover", function() {
-            d3.select(this).attr("fill", "blue");
+        .on("mouseover", function(event, d) {
+            d3.select(this).attr("fill", "blue"); // Change color on hover
         })
-        .on("mouseout", function(d) {
-            const countryId = d3.select(this).attr("id");
-            const countryData = veganData.find(item => item.country.replace(/\s+/g, '') === countryId);
-            const fillColor = countryData && countryData.vegans_percentage > 0 ? "lightgreen" : "lightgrey";
-            d3.select(this).attr("fill", fillColor);
+        .on("mouseout", function(event, d) {
+            d3.select(this).attr("fill", "lightgray"); // Revert back to original color on mouseout
         });
-}      
+}
