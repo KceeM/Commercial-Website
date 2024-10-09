@@ -69,5 +69,6 @@ svg {
 
 .x-axis path,
 .y-axis path {
-    display: none;
+    display: block;
+    stroke: black;
 }

@@ -49,6 +49,7 @@ function createLineGraph(data) {
         .defined(d => d.vegetarians_percentage !== null)
         .x(d => x(d.country) + x.bandwidth() / 2)
         .y(d => y(d.vegetarians_percentage || 0));
+    
 
     // vegetarian lines first
     svg.append("path")
@@ -70,6 +71,8 @@ function createLineGraph(data) {
 
     // Tooltip functionality for vegans and vegetarians
     const tooltip = d3.select("#tooltip1");
+
+    
 
     // Adds circles for vegans
     svg.selectAll(".dot-vegans")
