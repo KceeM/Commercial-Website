@@ -133,52 +133,43 @@ function createMap(data) {
 
 }
 
-// Function to update the map with vegan/vegetarian data
 function updateMapWithData(data) {
-    const tooltip = d3.select("body").append("div") 
-        .attr("class", "tooltip") 
-        .style("opacity", 0); 
+    const tooltip = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
 
     data.forEach(function(d) {
-        // Select country by ID
         const countryElement = d3.select(`#${d.country.replace(/\s+/g, '')}`);
-
-        // Check country
+        
         if (countryElement.size() > 0) {
-            // Set the initial fill color based on the vegan percentage
-            const fillColor = d.vegans_percentage > 0 ? "lightgreen" : "lightgrey"; 
-            countryElement.attr("fill", fillColor);
-
-            // mouseover functionality for countries with data
-            if (d.vegans_percentage > 0 || d.vegetarians_percentage > 0) {
-                countryElement
-                    .on("mouseover", function(event) {
-                        tooltip.transition().duration(200).style("opacity", .9);
-                        tooltip.html(`${d.country}<br>Vegans: ${d.vegans_percentage}%<br>Vegetarians: ${d.vegetarians_percentage}%`)
-                            .style("left", (event.pageX + 5) + "px")
-                            .style("top", (event.pageY - 28) + "px");
-                    })
-                    .on("mousemove", function(event) {
-                        tooltip.style("left", (event.pageX + 5) + "px")
-                            .style("top", (event.pageY - 28) + "px");
-                    })
-                    .on("mouseout", function() {
-                        tooltip.transition().duration(500).style("opacity", 0);
-                    });
-            } else {
-                // Countries without data remain grey and non-interactive
-                countryElement
-                    .attr("fill", "lightgray")
-                    .style("pointer-events", "none"); 
-            }
+            const fillColor = d.vegans_percentage > 0 ? "lightgreen" : "lightgrey";
+            countryElement.attr("fill", fillColor)
+                .on("mouseover", function(event) {
+                    tooltip.transition().duration(200).style("opacity", .9);
+                    tooltip.html(`${d.country}<br>Vegans: ${d.vegans_percentage}%<br>Vegetarians: ${d.vegetarians_percentage}%`)
+                        .style("left", (event.pageX + 5) + "px")
+                        .style("top", (event.pageY - 28) + "px");
+                })
+                .on("mousemove", function(event) {
+                    tooltip.style("left", (event.pageX + 5) + "px")
+                        .style("top", (event.pageY - 28) + "px");
+                })
+                .on("mouseout", function() {
+                    tooltip.transition().duration(500).style("opacity", 0);
+                });
         }
     });
 }
 
 function setupSVGInteractions() {
-    
     d3.selectAll("#ne_10m_admin_0_countries path")
-        .on("mouseover", function(event, d) {
-            d3.select(this).attr("fill", "blue"); // Change color on hover
+        .on("mouseover", function() {
+            d3.select(this).attr("fill", "blue");
         })
-}           
+        .on("mouseout", function(d) {
+            const countryId = d3.select(this).attr("id");
+            const countryData = veganData.find(item => item.country.replace(/\s+/g, '') === countryId);
+            const fillColor = countryData && countryData.vegans_percentage > 0 ? "lightgreen" : "lightgrey";
+            d3.select(this).attr("fill", fillColor);
+        });
+}      
