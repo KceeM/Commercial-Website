@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setupSVGInteractions(); // functions for calling interactions after map is loaded
 
         //adding the veganveg data to the map
-        d3.json("jsonfile/veganvegetariandata.json").then(function(veganData) {
+        d3.json("../jsonfile/veganvegetariandata.json").then(function(veganData) {
             updateMapWithData(veganData);
         });
     });
@@ -132,32 +132,46 @@ function createMap(data) {
 
 // Function to update the map with vegan/vegetarian data
 function updateMapWithData(data) {
-    data.forEach(function(d) {
-        
-        const countryElement = d3.select(`#${d.country.replace(/\s+/g, '')}`); //ID
+    const tooltip = d3.select("body").append("div") // Create a tooltip div
+        .attr("class", "tooltip") // Add a class for styling
+        .style("opacity", 0); // Start invisible
 
-        // Check if the country data exists
+    data.forEach(function(d) {
+        // Assume your SVG paths have IDs that match the country names without spaces
+        const countryElement = d3.select(`#${d.country.replace(/\s+/g, '')}`); // Adjust ID if necessary
+
+        // Check if the country element exists
         if (countryElement.size() > 0) {
-            //fill color based on the vegan percentage
-            const fillColor = d.vegans_percentage > 5 ? "green" : "lightgreen";
+            // Set the initial fill color based on the vegan percentage
+            const fillColor = d.vegans_percentage > 0 ? "lightgreen" : "lightgrey"; // Example color logic
             countryElement.attr("fill", fillColor);
 
-            //mouseover function to show percentages
-            countryElement
-                .on("mouseover", function(event) {
-                    // Shows tooltip with vegan & vegetarian percentages
-                    tooltip.transition().duration(200).style("opacity", .9);
-                    tooltip.html(`Vegans: ${d.vegans_percentage}%<br>Vegetarians: ${d.vegetarians_percentage}%`)
-                        .style("left", (event.pageX + 5) + "px")
-                        .style("top", (event.pageY - 28) + "px");
-                })
-                .on("mouseout", function() {
-                    tooltip.transition().duration(500).style("opacity", 0);
-                });
+            // Add mouseover functionality to show percentages for countries with data
+            if (d.vegans_percentage > 0 || d.vegetarians_percentage > 0) {
+                countryElement
+                    .on("mouseover", function(event) {
+                        // Show tooltip with country name and percentages
+                        tooltip.transition().duration(200).style("opacity", .9);
+                        tooltip.html(`${d.country}<br>Vegans: ${d.vegans_percentage}%<br>Vegetarians: ${d.vegetarians_percentage}%`)
+                            .style("left", (event.pageX + 5) + "px")
+                            .style("top", (event.pageY - 28) + "px");
+                    })
+                    .on("mousemove", function(event) {
+                        tooltip.style("left", (event.pageX + 5) + "px")
+                            .style("top", (event.pageY - 28) + "px");
+                    })
+                    .on("mouseout", function() {
+                        tooltip.transition().duration(500).style("opacity", 0);
+                    });
+            } else {
+                // Countries without data remain grey and non-interactive
+                countryElement
+                    .attr("fill", "lightgray")
+                    .style("pointer-events", "none"); // Disable pointer events
+            }
         }
     });
 }
-
 
 function setupSVGInteractions() {
     // Select all paths inside the group with id "ne_10m_admin_0_countries"
