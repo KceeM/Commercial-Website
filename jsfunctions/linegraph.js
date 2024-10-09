@@ -50,22 +50,23 @@ function createLineGraph(data) {
         .x(d => x(d.country) + x.bandwidth() / 2)
         .y(d => y(d.vegetarians_percentage));
 
-    // Adds lines
+    // vegetarian lines first
     svg.append("path")
-        .datum(data)
-        .attr("class", "line vegans")
-        .attr("d", lineVegans)
-        .style("fill", "none")
-        .style("stroke", "greenyellow")
-        .style("stroke-width", 2);
+    .datum(data)
+    .attr("class", "line vegetarians")
+    .attr("d", lineVegetarians)
+    .style("fill", "none")
+    .style("stroke", "orange")
+    .style("stroke-width", 2);
 
+    //vegan lines 2nd
     svg.append("path")
-        .datum(data)
-        .attr("class", "line vegetarians")
-        .attr("d", lineVegetarians)
-        .style("fill", "none")
-        .style("stroke", "orange")
-        .style("stroke-width", 2);
+    .datum(data)
+    .attr("class", "line vegans")
+    .attr("d", lineVegans)
+    .style("fill", "none")
+    .style("stroke", "greenyellow")
+    .style("stroke-width", 2);
 
     // Tooltip functionality for vegans and vegetarians
     const tooltip = d3.select("#tooltip1");
@@ -111,4 +112,40 @@ function createLineGraph(data) {
         .on("mouseout", function() {
             tooltip.style("visibility", "hidden");
         });
+
+    //x-axis label
+    svg.append("text")
+        .attr("text-anchor", "middle")
+        .attr("x", width / 2)
+        .attr("y", height + margin.bottom - 5) // Position below the axis
+        .text("Countries")
+        .style("font-size", "14px")
+        .style("fill", "black");
+
+    //y-axis label
+    svg.append("text")
+        .attr("text-anchor", "middle")
+        .attr("transform", "rotate(-90)")
+        .attr("x", -height / 2)
+        .attr("y", -margin.left + 15) // Position to the left of the axis
+        .text("Percentage Values")
+        .style("font-size", "14px")
+        .style("fill", "black");
+    //vertical grid lines
+    svg.append("g")			
+        .attr("class", "grid")
+        .attr("transform", `translate(0, ${height})`)
+        .call(d3.axisBottom(x)
+            .tickSize(-height)
+            .tickFormat('')
+        );
+    //horizontal grid lines
+    svg.append("g")			
+        .attr("class", "grid")
+        .call(d3.axisLeft(y)
+            .tickSize(-width)
+            .tickFormat('')
+        );
+        
+
 }
