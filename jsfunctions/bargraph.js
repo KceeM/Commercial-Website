@@ -21,7 +21,7 @@ function createBarGraphs(yearlyData, productData) {
     // Graph 1: Sales Growth by Year
     const svg1 = d3.select("#yearly-sales-graph")
         .append("svg")
-        .attr("width", "100%")
+        .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", `translate(${margin.left}, ${margin.top})`);
@@ -82,7 +82,7 @@ function createBarGraphs(yearlyData, productData) {
     // Graph 2: Product Sales and Forecast
     const svg2 = d3.select("#product-sales-forecast-graph")
         .append("svg")
-        .attr("width", "100%")
+        .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", `translate(${margin.left}, ${margin.top})`);
