@@ -97,15 +97,20 @@ body {
 }
 
 .bar {
-    transition: fill 0.2s ease;
+    fill: steelblue;
 }
 
-.x-axis text {
-    font-size: 14px;
+.bar-sales {
+    fill: green;
 }
 
-.y-axis text {
-    font-size: 14px;
+.bar-forecast {
+    fill: orange;
+}
+
+.x-axis text, .y-axis text {
+    font-size: 12px;
+    fill: #555;
 }
 
 .label {
