@@ -59,19 +59,24 @@ svg {
 
 .key-box {
     display: inline-block;
-    width: 10px;
-    height: 10px;
+    width: 15px;
+    height: 15px;
     margin-right: 5px;
+    vertical-align: middle;
 }
 
 .vegans {
-    stroke: greenyellow;
-    stroke-width: 2px;
+    background-color: greenyellow;
 }
 
 .vegetarians {
-    stroke: orange;
-    stroke-width: 2px;
+    background-color: orange;
+}
+
+.key-item {
+    margin: 0; 
+    font-size: 14px; 
+    color: black; 
 }
 
 .x-axis path,
