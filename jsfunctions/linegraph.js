@@ -34,7 +34,7 @@ function createLineGraph(data) {
         .attr("class", "x-axis")
         .attr("transform", `translate(0, ${height})`)
         .call(d3.axisBottom(x))
-       
+        
 
     svg.append("g")
         .attr("class", "y-axis")
@@ -81,7 +81,7 @@ function createLineGraph(data) {
         .enter().append("circle")
         .attr("class", "dot-vegans")
         .attr("cx", d => x(d.country) + x.bandwidth() / 2)
-        .attr("cy", d => y(d.vegans_percentage || 0))
+        .attr("cy", d => y(d.vegans_percentage))
         .attr("r", 5)
         .style("fill", "green")
         .on("mouseover", function(event, d) {
@@ -102,7 +102,7 @@ function createLineGraph(data) {
         .enter().append("circle")
         .attr("class", "dot-vegetarians")
         .attr("cx", d => x(d.country) + x.bandwidth() / 2)
-        .attr("cy", d => y(d.vegetarians_percentage || 0))
+        .attr("cy", d => y(d.vegetarians_percentage))
         .attr("r", 5)
         .style("fill", "orange")
         .on("mouseover", function(event, d) {
