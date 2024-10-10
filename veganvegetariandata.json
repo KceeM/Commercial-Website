@@ -41,7 +41,7 @@
       },
       {
         "country": "Vietnam",
-        "vegans_percentage": null,
+        "vegans_percentage": 0,
         "vegetarians_percentage": 10
       },
       {
@@ -51,12 +51,12 @@
       },
       {
         "country": "Argentina",
-        "vegans_percentage": null,
+        "vegans_percentage": 0,
         "vegetarians_percentage": 12
       },
       {
         "country": "Thailand",
-        "vegans_percentage": null,
+        "vegans_percentage": 0,
         "vegetarians_percentage": 8
       },
       {
@@ -71,7 +71,7 @@
       },
       {
         "country": "Taiwan",
-        "vegans_percentage": null,
+        "vegans_percentage": 0,
         "vegetarians_percentage": 14
       },
       {
@@ -96,22 +96,22 @@
       },
       {
         "country": "Ukraine",
-        "vegans_percentage": null,
+        "vegans_percentage": 0,
         "vegetarians_percentage": 5.2
       },
       {
         "country": "Chile",
-        "vegans_percentage": null,
+        "vegans_percentage": 0,
         "vegetarians_percentage": 6
       },
       {
         "country": "South Korea",
-        "vegans_percentage": null,
+        "vegans_percentage": 0,
         "vegetarians_percentage": 3
       },
       {
         "country": "Russia",
-        "vegans_percentage": null,
+        "vegans_percentage": 0,
         "vegetarians_percentage": 1
       },
       {
@@ -161,7 +161,7 @@
       },
       {
         "country": "New Zealand",
-        "vegans_percentage": null,
+        "vegans_percentage": 0,
         "vegetarians_percentage": 10
       },
       {
@@ -181,12 +181,12 @@
       },
       {
         "country": "Singapore",
-        "vegans_percentage": null,
+        "vegans_percentage": 0,
         "vegetarians_percentage": 7
       },
       {
         "country": "Jamaica",
-        "vegans_percentage": null,
+        "vegans_percentage": 0,
         "vegetarians_percentage": 10
       },
       {

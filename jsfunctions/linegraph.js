@@ -18,7 +18,6 @@ function createLineGraph(data) {
         .append("g")
         .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-    //setting up the scales
     const x = d3.scaleBand()
         .domain(data.map(d => d.country))
         .range([0, width])
@@ -72,8 +71,6 @@ function createLineGraph(data) {
 
     // Tooltip functionality for vegans and vegetarians
     const tooltip = d3.select("#tooltip1");
-
-    
 
     // Adds circles for vegans
     svg.selectAll(".dot-vegans")
