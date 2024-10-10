@@ -50,7 +50,7 @@ svg {
 #line-graph-container {
     display: flex;
     justify-content: center;
-    margin-left: 300px;
+    margin-left: 250px;
 }
 
 .line {
@@ -83,12 +83,6 @@ svg {
     stroke: black;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-}
 
 .graph-container {
     display: flex;
