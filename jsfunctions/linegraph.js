@@ -49,7 +49,8 @@ function createLineGraph(data) {
         .defined(d => d.vegetarians_percentage !== null)
         .x(d => x(d.country) + x.bandwidth() / 2)
         .y(d => y(d.vegetarians_percentage));
-    
+
+        
 
     // vegetarian lines first
     svg.append("path")
