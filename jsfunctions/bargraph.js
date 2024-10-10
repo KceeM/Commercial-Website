@@ -41,8 +41,10 @@ function createBarGraphs(yearlyData, productData) {
     svg1.append("g")
         .call(d3.axisLeft(y1))
         .append("text")
+        .attr("transform", "rotate(-90)")
         .attr("y", -50)
         .attr("x", -height / 2)
+        .attr("dy", "-3.5em")
         .attr("transform", "rotate(-90)")
         .attr("text-anchor", "middle")
         .attr("fill", "black")
@@ -91,6 +93,7 @@ function createBarGraphs(yearlyData, productData) {
         .attr("y", -50)
         .attr("x", -height / 2)
         .attr("transform", "rotate(-90)")
+        .attr("dy", "-3.5em")
         .attr("text-anchor", "middle")
         .attr("fill", "black")
         .text("Sales (in billion USD)");
