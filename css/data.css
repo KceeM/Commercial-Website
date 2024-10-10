@@ -57,6 +57,13 @@ svg {
     fill: none;
 }
 
+.key-box {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 5px;
+}
+
 .vegans {
     stroke: greenyellow;
     stroke-width: 2px;
