@@ -50,7 +50,7 @@ function createBarGraphs(yearlyData, productData) {
         .call(d3.axisLeft(y1))
         .append("text")
         .attr("transform", "rotate(-90)")
-        .attr("y", -70)
+        .attr("y", 50)
         .attr("x", -height / 2)
         .attr("dy", "-3.5em")
         .attr("text-anchor", "middle")
