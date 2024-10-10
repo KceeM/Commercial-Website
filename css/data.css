@@ -50,7 +50,7 @@ svg {
 #line-graph-container {
     display: flex;
     justify-content: center;
-    margin-left: 50px;
+    margin-left: 200px;
 }
 
 .line {
