@@ -82,3 +82,24 @@ svg {
     display: block;
     stroke: black;
 }
+
+#bar-graph-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+}
+.bar {
+    fill: green;
+}
+
+#tooltip2 {
+    position: absolute;
+    visibility: hidden; 
+    background: white; 
+    border: 1px solid black; 
+    padding: 5px; 
+    border-radius: 4px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Shadow */
+    z-index: 10; /* Ensuring it's placed above */
+    pointer-events: none; 
+}
