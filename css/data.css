@@ -50,7 +50,7 @@ svg {
 #line-graph-container {
     display: flex;
     justify-content: center;
-    margin-left: 200px;
+    margin-left: 300px;
 }
 
 .line {
@@ -59,7 +59,7 @@ svg {
 
 .key-box {
     display: inline-block;
-    width: 15px;
+    width: 20px;
     height: 15px;
     
 }

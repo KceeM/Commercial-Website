@@ -132,7 +132,7 @@ function createLineGraph(data) {
         .attr("text-anchor", "middle")
         .attr("transform", "rotate(-90)")
         .attr("x", -height / 2)
-        .attr("y", -margin.left + 15) // Position to the left of the axis
+        .attr("y", -margin.left + 10) // Position to the left of the axis
         .text("Percentage Values")
         .style("font-size", "14px")
         .style("fill", "black");
