@@ -21,11 +21,16 @@
     height: auto; 
 }
 
+p {
+    font-size: 30px;
+}
+
 #map-container {
+    margin-top: 50px;
     width: 100%;
     height: 600px;
     max-width: 800px;
-    margin: 0 auto;
+    
 }
 
 svg {
