@@ -110,7 +110,7 @@ function createBarGraphs(yearlyData, productData) {
     svg2.append("g")
         .call(d3.axisLeft(y2))
         .append("text")
-        .attr("y", 200)
+        .attr("y", 50)
         .attr("x", -height / 2)
         .attr("transform", "rotate(-90)")
         .attr("dy", "-3.5em")
