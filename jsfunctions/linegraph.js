@@ -34,7 +34,7 @@ function createLineGraph(data) {
         .attr("transform", `translate(0, ${height})`)
         .call(d3.axisBottom(x))
         .selectAll("text")  
-        .style("text-anchor", "middle")  // Align text
+        .style("text-anchor", "end")  // Align text
         .attr("dx", "-0.8em")  // Adjust horizontal pos
         .attr("dy", "0.15em")  // Adjust vertical pos
         .attr("transform", "rotate(-90)");  // Rotate text at an angle of -90 degrees
