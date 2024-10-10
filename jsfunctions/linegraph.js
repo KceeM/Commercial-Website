@@ -122,7 +122,7 @@ function createLineGraph(data) {
     svg.append("text")
         .attr("text-anchor", "middle")
         .attr("x", width / 2)
-        .attr("y", height + margin.bottom - 50) // Position below the axis
+        .attr("y", height + margin.bottom + 50) // Position below the axis
         .text("Countries")
         .style("font-size", "14px")
         .style("fill", "black");
