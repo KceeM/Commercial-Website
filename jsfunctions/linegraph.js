@@ -18,6 +18,7 @@ function createLineGraph(data) {
         .append("g")
         .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
+    //setting up the scales
     const x = d3.scaleBand()
         .domain(data.map(d => d.country))
         .range([0, width])
@@ -33,7 +34,11 @@ function createLineGraph(data) {
         .attr("class", "x-axis")
         .attr("transform", `translate(0, ${height})`)
         .call(d3.axisBottom(x))
-        
+        selectAll("text")  
+        .style("text-anchor", "end")  // Align text 
+        .attr("dx", "-0.8em")  // Adjust horizontal pos
+        .attr("dy", "0.15em")  // Adjust vertical pos
+        .attr("transform", "rotate(-90)");  // Rotate text at an angle of -65 degrees
 
     svg.append("g")
         .attr("class", "y-axis")
@@ -80,7 +85,7 @@ function createLineGraph(data) {
         .enter().append("circle")
         .attr("class", "dot-vegans")
         .attr("cx", d => x(d.country) + x.bandwidth() / 2)
-        .attr("cy", d => y(d.vegans_percentage))
+        .attr("cy", d => y(d.vegans_percentage || 0))
         .attr("r", 5)
         .style("fill", "green")
         .on("mouseover", function(event, d) {
@@ -101,7 +106,7 @@ function createLineGraph(data) {
         .enter().append("circle")
         .attr("class", "dot-vegetarians")
         .attr("cx", d => x(d.country) + x.bandwidth() / 2)
-        .attr("cy", d => y(d.vegetarians_percentage))
+        .attr("cy", d => y(d.vegetarians_percentage || 0))
         .attr("r", 5)
         .style("fill", "orange")
         .on("mouseover", function(event, d) {
