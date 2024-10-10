@@ -34,7 +34,7 @@ function createLineGraph(data) {
         .attr("class", "x-axis")
         .attr("transform", `translate(0, ${height})`)
         .call(d3.axisBottom(x))
-        selectAll("text")  
+        .selectAll("text")  
         .style("text-anchor", "end")  // Align text 
         .attr("dx", "-0.8em")  // Adjust horizontal pos
         .attr("dy", "0.15em")  // Adjust vertical pos
@@ -48,12 +48,12 @@ function createLineGraph(data) {
     const lineVegans = d3.line()
         .defined(d => d.vegans_percentage !== null)
         .x(d => x(d.country) + x.bandwidth() / 2)
-        .y(d => y(d.vegans_percentage || 0));
+        .y(d => y(d.vegans_percentage));
 
     const lineVegetarians = d3.line()
         .defined(d => d.vegetarians_percentage !== null)
         .x(d => x(d.country) + x.bandwidth() / 2)
-        .y(d => y(d.vegetarians_percentage || 0));
+        .y(d => y(d.vegetarians_percentage));
     
 
     // vegetarian lines first
