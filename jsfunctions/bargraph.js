@@ -1,7 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
     fetch('plantbasedproducts_growth.json')
-        .then(response => response.json())
-        .then(data => createBarGraphs(data))
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Network or error");
+            }
+            return response.json();
+        })
+        .then(data => createBarGraphs(data.yearlyData, data.productData))  // Ensure correct data is passed
         .catch(error => console.error("Error loading data:", error));
 });
 
@@ -53,12 +58,12 @@ function createBarGraphs(yearlyData, productData) {
     svg1.selectAll(".bar")
         .data(yearlyData)
         .enter().append("rect")
+        .attr("class", "bar") 
         .attr("x", d => x1(d.year))
         .attr("y", d => y1(d.sales))
         .attr("width", x1.bandwidth())
         .attr("height", d => height - y1(d.sales))
-        .attr("class", "bar");
-
+    
     // Graph 2: Product Sales and Forecast
     const svg2 = d3.select("#product-sales-forecast-graph")
         .append("svg")
@@ -102,20 +107,20 @@ function createBarGraphs(yearlyData, productData) {
     svg2.selectAll(".bar-sales")
         .data(productData)
         .enter().append("rect")
+        .attr("class", "bar-sales") 
         .attr("x", d => x2(d.productType))
         .attr("y", d => y2(d.sales))
         .attr("width", x2.bandwidth() / 2)
         .attr("height", d => height - y2(d.sales))
-        .attr("class", "bar-sales")
         .attr("fill", "green");
 
     svg2.selectAll(".bar-forecast")
         .data(productData)
         .enter().append("rect")
+        .attr("class", "bar-forecast")
         .attr("x", d => x2(d.productType) + x2.bandwidth() / 2)
         .attr("y", d => y2(d.forecast))
         .attr("width", x2.bandwidth() / 2)
         .attr("height", d => height - y2(d.forecast))
-        .attr("class", "bar-forecast")
         .attr("fill", "orange");
 }
