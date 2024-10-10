@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     fetch('plantbasedproducts_growth.json')
         .then(response => response.json())
-        .then(data => createBarGraph(data))
+        .then(data => createBarGraphs(data))
         .catch(error => console.error("Error loading data:", error));
 });
 
