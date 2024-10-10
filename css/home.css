@@ -59,7 +59,7 @@
 .blog-preview {
     width: 30%;
     padding: 20px;
-    border: 1px solid #5338ff;
+    border: 1px solid orange;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -89,9 +89,9 @@
 .blog-preview button {
     padding: 10px 20px;
     font-size: 1em;
-    background-color: #6b64f5;
+    background-color: greenyellow;
     color: #ffffff;
-    border: 1px solid #5338ff;
+    border: 1px solid greenyellow;
     border-radius: 20px;
     cursor: pointer;
 }
