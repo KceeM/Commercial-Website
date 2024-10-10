@@ -15,6 +15,9 @@ function createBarGraphs(yearlyData, productData) {
     const width = 800 - margin.left - margin.right;
     const height = 400 - margin.top - margin.bottom;
 
+    // Create tooltip
+    const tooltip = d3.select("#tooltip2");
+
     // Graph 1: Sales Growth by Year
     const svg1 = d3.select("#yearly-sales-graph")
         .append("svg")
@@ -50,7 +53,6 @@ function createBarGraphs(yearlyData, productData) {
         .attr("y", -50)
         .attr("x", -height / 2)
         .attr("dy", "-3.5em")
-        .attr("transform", "rotate(-90)")
         .attr("text-anchor", "middle")
         .attr("fill", "black")
         .text("Sales (in billion USD)");
@@ -63,6 +65,19 @@ function createBarGraphs(yearlyData, productData) {
         .attr("y", d => y1(d.sales))
         .attr("width", x1.bandwidth())
         .attr("height", d => height - y1(d.sales))
+        .on("mouseover", function(event, d) {
+            tooltip.style("visibility", "visible")
+                .html(`Year: ${d.year}<br>Sales: $${d.sales} billion`)
+                .style("left", (event.pageX + 5) + "px")
+                .style("top", (event.pageY - 28) + "px");
+        })
+        .on("mousemove", function(event) {
+            tooltip.style("left", (event.pageX + 5) + "px")
+                .style("top", (event.pageY - 28) + "px");
+        })
+        .on("mouseout", function() {
+            tooltip.style("visibility", "hidden");
+        });
     
     // Graph 2: Product Sales and Forecast
     const svg2 = d3.select("#product-sales-forecast-graph")
@@ -112,7 +127,20 @@ function createBarGraphs(yearlyData, productData) {
         .attr("y", d => y2(d.sales))
         .attr("width", x2.bandwidth() / 2)
         .attr("height", d => height - y2(d.sales))
-        .attr("fill", "green");
+        .attr("fill", "green")
+        .on("mouseover", function(event, d) {
+            tooltip.style("visibility", "visible")
+                .html(`Product: ${d.productType}<br>Sales: $${d.sales} billion`)
+                .style("left", (event.pageX + 5) + "px")
+                .style("top", (event.pageY - 28) + "px");
+        })
+        .on("mousemove", function(event) {
+            tooltip.style("left", (event.pageX + 5) + "px")
+                .style("top", (event.pageY - 28) + "px");
+        })
+        .on("mouseout", function() {
+            tooltip.style("visibility", "hidden");
+        });
 
     svg2.selectAll(".bar-forecast")
         .data(productData)
@@ -122,5 +150,18 @@ function createBarGraphs(yearlyData, productData) {
         .attr("y", d => y2(d.forecast))
         .attr("width", x2.bandwidth() / 2)
         .attr("height", d => height - y2(d.forecast))
-        .attr("fill", "orange");
+        .attr("fill", "orange")
+        .on("mouseover", function(event, d) {
+            tooltip.style("visibility", "visible")
+                .html(`Product: ${d.productType}<br>Forecast: $${d.forecast} billion`)
+                .style("left", (event.pageX + 5) + "px")
+                .style("top", (event.pageY - 28) + "px");
+        })
+        .on("mousemove", function(event) {
+            tooltip.style("left", (event.pageX + 5) + "px")
+                .style("top", (event.pageY - 28) + "px");
+        })
+        .on("mouseout", function() {
+            tooltip.style("visibility", "hidden");
+        });
 }
