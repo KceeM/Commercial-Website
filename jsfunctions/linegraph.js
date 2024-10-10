@@ -37,7 +37,7 @@ function createLineGraph(data) {
         .style("text-anchor", "end")  // Align text
         .attr("dx", "-0.8em")  // Adjust horizontal pos
         .attr("dy", "0.15em")  // Adjust vertical pos
-        .attr("transform", "rotate(-90)");  // Rotate text at an angle of -90 degrees
+        .attr("transform", "rotate(-65)");  // Rotate text at an angle of -90 degrees
         
 
     svg.append("g")
@@ -122,7 +122,7 @@ function createLineGraph(data) {
     svg.append("text")
         .attr("text-anchor", "middle")
         .attr("x", width / 2)
-        .attr("y", height + margin.bottom - 10) // Position below the axis
+        .attr("y", height + margin.bottom - 50) // Position below the axis
         .text("Countries")
         .style("font-size", "14px")
         .style("fill", "black");
