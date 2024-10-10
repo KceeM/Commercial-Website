@@ -1,0 +1,22 @@
+[
+    {
+        "productType": "Plant-based Meat",
+        "sales": 4900000000,
+        "forecast": 11600000000
+    },
+    {
+        "productType": "Dairy Alternatives",
+        "sales": 20000000000,
+        "forecast": 32000000000
+    },
+    {
+        "productType": "Plant-based Beverages",
+        "sales": 9000000000,
+        "forecast": 13000000000
+    },
+    {
+        "productType": "Other Plant-based Products",
+        "sales": 1200000000,
+        "forecast": 2200000000
+    }
+]

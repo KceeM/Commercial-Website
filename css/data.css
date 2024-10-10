@@ -83,15 +83,38 @@ svg {
     stroke: black;
 }
 
-#bar-graph-container {
-    width: 800px; 
-    height: 400px;
-    display: flex;
-    justify-content: center;
-    margin: 20px auto;
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
 }
+
+#bar-graph-container {
+    margin: 50px auto;
+    width: 80%;
+    height: auto;
+}
+
 .bar {
-    fill: green;
+    transition: fill 0.2s ease;
+}
+
+.x-axis text {
+    font-size: 14px;
+}
+
+.y-axis text {
+    font-size: 14px;
+}
+
+.label {
+    font-size: 12px;
+    fill: black;
+}
+
+.bar:hover {
+    cursor: pointer;
 }
 
 #tooltip2 {

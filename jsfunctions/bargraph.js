@@ -1,39 +1,39 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const apiKey = 'ef0323f5045049b28c111ce2a02c9687'; // API key from Spoonacular API
-
-    // Fetches product data
-    fetch(`https://api.spoonacular.com/food/products?apiKey=${apiKey}`)
+    fetch('plantbasedproducts_growth.json')
         .then(response => response.json())
-        .then(data => createBarGraph(data.products)) 
-        .catch(error => console.error("Error loading product data:", error));
+        .then(data => createBarGraph(data))
+        .catch(error => console.error("Error loading data:", error));
 });
 
 function createBarGraph(data) {
-    const margin = {top: 20, right: 30, bottom: 40, left: 40};
+    const margin = {top: 30, right: 30, bottom: 70, left: 60};
     const width = 800 - margin.left - margin.right;
-    const height = 400 - margin.top - margin.bottom;
+    const height = 500 - margin.top - margin.bottom;
 
     const svg = d3.select("#bar-graph-container")
         .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
-        .attr("transform", `translate(${margin.left}, ${margin.top})`);
+        .attr("transform", `translate(${margin.left},${margin.top})`);
 
     const x = d3.scaleBand()
-        .domain(data.map(d => d.productName)) //productName data
+        .domain(data.map(d => d.productType))
         .range([0, width])
-        .padding(0.1);
+        .padding(0.2);
 
     const y = d3.scaleLinear()
-        .domain([0, d3.max(data, d => d.sales)]) //sales data
+        .domain([0, d3.max(data, d => d.forecast)])
         .nice()
         .range([height, 0]);
 
     svg.append("g")
         .attr("class", "x-axis")
         .attr("transform", `translate(0, ${height})`)
-        .call(d3.axisBottom(x));
+        .call(d3.axisBottom(x))
+        .selectAll("text")
+        .attr("transform", "rotate(-45)")
+        .style("text-anchor", "end");
 
     svg.append("g")
         .attr("class", "y-axis")
@@ -43,14 +43,24 @@ function createBarGraph(data) {
         .data(data)
         .enter().append("rect")
         .attr("class", "bar")
-        .attr("x", d => x(d.productName)) // ensures productName exists
-        .attr("y", d => y(d.sales)) // ensures sales exists
+        .attr("x", d => x(d.productType))
+        .attr("y", d => y(d.sales))
         .attr("width", x.bandwidth())
         .attr("height", d => height - y(d.sales))
+        .attr("fill", "green")
         .on("mouseover", function(event, d) {
-            d3.select(this).style("fill", "orange"); // changes color on hover
+            d3.select(this).style("fill", "orange");
         })
         .on("mouseout", function(event, d) {
-            d3.select(this).style("fill", "green"); // revert color
+            d3.select(this).style("fill", "green");
         });
+
+    svg.selectAll(".label")
+        .data(data)
+        .enter().append("text")
+        .attr("class", "label")
+        .attr("x", d => x(d.productType) + x.bandwidth() / 2)
+        .attr("y", d => y(d.sales) - 10)
+        .attr("text-anchor", "middle")
+        .text(d => `$${(d.sales / 1e9).toFixed(1)}B`);
 }
