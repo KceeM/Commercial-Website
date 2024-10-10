@@ -21,6 +21,7 @@ body {
     display: flex;
     align-items: center;
     margin-bottom: 30px;
+    margin-top: 30px;
 }
 
 .profile-image {
@@ -82,3 +83,4 @@ body {
 .bio-section strong {
     color: #2c8f2c;
 }
+ 

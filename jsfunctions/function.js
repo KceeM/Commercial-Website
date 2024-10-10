@@ -5,8 +5,8 @@ document.addEventListener('DOMContentLoaded', function() {
     setupNavigationButtons();
     animateTitleText();
     setupReadMoreButtons();
+    setLinksToOpenInNewTab();
     
-
     const blogPosts = d3.selectAll('.blog-post');
 
     //integration of the vegan vegetarian data and the svg data
@@ -59,6 +59,7 @@ function setupNavigationButtons() {
         { id: 'profileBtn', url: 'profile.html' },
         { id: 'designBtn', url: 'design.html' },
         { id: 'theorysBtn', url: 'theory.html' },
+        { id: 'recentBlogsBtn', url: 'blogposts.html' }
         
     ];
     
@@ -89,6 +90,14 @@ function setupReadMoreButtons() {
         });
     });
 }
+
+function setLinksToOpenInNewTab() {
+    const links = document.querySelectorAll('a');
+    links.forEach(link => {
+        link.setAttribute('target', '_blank');
+    });
+}
+
 //D3.js function to animate the title text
 function animateTitleText() {
     d3.select("#title-text")
@@ -154,7 +163,7 @@ function createMap(geoData) {
         .style("padding", "5px")
         .style("font-size", "12px");
 
-    // Add hover functionality to display country names
+    // hover functionality to display country names
     countries
         .on("mouseover", function(event, d) {
             tooltip.transition().duration(200).style("opacity", .9);

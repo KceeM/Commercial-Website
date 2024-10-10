@@ -19,5 +19,9 @@ function typeWriterEffect(text, elementId, speed) {
 
 // function on window load or after the DOM is ready
 window.onload = function() {
-    typeWriterEffect(typewriterText, "#typewriter", 100); // Adjust speed (100ms per character)
+    typeWriterEffect(typewriterText, "#typewriter", 100); // speed (100ms)
 };
+
+
+
+

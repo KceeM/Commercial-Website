@@ -6,8 +6,9 @@
     <meta name="description" content="the homepage introducing a vegan lifestyle, offering blog posts, recipes and data in relation to vegan statistics in the world">
     <meta name="keywords" content="vegan, vegetarianism, plant based food, vegan recipes, vegan food, vegan lifetsyle, plant based lifetstyle, healthy food, healthy eating, vegan benefits">
     <meta name="author" content="Kaycee Chantelle Mashilo">
-    <title>Home</title>
+    <title>Design</title>
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/theory.css">
     
 </head>
 <body>
@@ -31,22 +32,102 @@
     
     </header>
 
-    <section id="intro-section" aria-label="Introduction Section">
-        <h1 id="title-text">The Vegan Vitality</h1>
+    <section id="heading-section" aria-label="heading Section">
+        <h1 id="heading-text">Design Section</h1>
     </section>
 
     <main>
-        <section id="intro" class="intro-section">
-            <article class="intro-text">
-                <h2>Welcome to The Vegan Vitality</h2>
-                <p>Discover a vibrant world of plant-based goodness. Explore delicious, nutrient-packed recipes designed to fuel your body and soul, all while being kind to the planet.</p>
-            </article>
-            
-            <figure class="intro-image">
-                <img src="images/F1.png" alt="Plant-based dish image">
-                <figcaption>A delicious plant-based dish</figcaption>
-            </figure>
-        </section>
+        <h1>Designing and Developing a Commercial Data Visualization Website</h1>
+        <p>Goal: Creating a commercial grade website that would showcase my interest in plant-based and vegan lifestyle.</p>
+        <p>Main Web development focusing on JavaScript, UI/UX design, and data visualizations using D3.js.</p> 
+        <p>The process began with defining the core structure and design of the website, focusing on a vegan and plant-based lifestyle theme. I aimed for a visually appealing and functional design that reflects the site's purpose of educating and sharing plant-based recipes, blog posts, and data. The primary color palette consisted of green and orange to align with the theme of sustainability and health.</p>
+
+        <article class="article-container">
+            <h1>Development process:</h1>
+            <p>Initially, the website theme was broad, but we decided to focus exclusively on vegan/plant-based blog posts & data for simplicity and alignment with my interests.</p>
+            <p>Challenges:
+                <li>After adding blog posts, running out of time to add recipes</li>
+                <li>Understanding how to implement complex data visualizations with D3.js.</li>
+            </p>
+            <p>Data Visualizations: Initial Decisions and API Integration Attempts As part of the website, I aimed to include at least two data visualizations: a bar/line graph and a map or bubble chart. One of the key goals was to show vegan and vegetarian trends globally.</p>
+            <p>I initially signed up for the Spoonacular API, hoping to pull data on plant-based products directly. However, integrating the API proved difficult:
+                <li>The Spoonacular API didn’t have straightforward data related to plant-based product trends.</li>
+                <li>I encountered a 405 error on my GitHub Pages site when attempting to use the API, due to request restrictions on server communication.</li>
+            </p>
+            <p>Challenges:
+                <li>Learning how to work with APIs and handling CORS (Cross-Origin Resource Sharing) errors.</li>
+                <li>Finding accurate, ready-made data on plant-based products for my specific use case.</li>
+            </p>
+            <p>Pivot to Manual Data Entry for Visualizations Given the complexity of using an external API, I pivoted to manually entering data for plant-based product trends. This decision allowed me to fully control the data being visualized, ensuring it matched the exact topic I wanted to highlight.</p>
+            <p>I used two datasets:
+                <li> 1. Yearly global sales growth of plant-based products from 2020 to 2026.</li>
+                <li> 2.Current sales and forecasts for specific categories (e.g., plant-based meat, dairy alternatives, etc.).</li>
+            </p>
+            <p>These datasets were manually entered into JSON files, which allowed me to solve the API issues entirely as I was running out of more time trying to solve the errors I encountered.There are also not a lot of API's for this specific data so I struggled to find them. The next solution was to change the theme, but I am too passionate about the theme and I had already done my blog posts and profile.</p>
+            <p>I initially signed up for the Spoonacular API, hoping to pull data on plant-based products directly. However, integrating the API proved difficult:
+                <li>The layout included two main graphs: one to show the yearly sales growth and another to compare product sales and forecasts.</li>
+                <li>I used D3.js to create the graphs, which required understanding how to manipulate data, create scales, axes, and bars, and ensure proper responsiveness.</li>
+            </p>    
+            <p>Challenges:
+                <li>Learning how to use D3.js to render the graphs.</li>
+                <li>Managing alignment issues with the axes (e.g., Y-axis values not aligning properly with the grid).</li>
+                <li>Ensuring the axes had proper titles and labels for clarity.</li>
+            </p>
+            <p>Refining the Visuals Once the basic visualizations were in place, I refined them further:
+                <li>Added titles for the X and Y axes to make the graphs more understandable.</li>
+                <li>Fixed alignment issues where the Y-axis values were sitting too close to the zero line.</li>
+                <li>Made design adjustments for a cleaner, more professional look.</li>
+                At this stage, I decided to add the colour schemes, settling on green and orange hues to complement the plant-based theme of the website.
+            </p>
+            <p>Challenges Throughout the Process Throughout the project, several challenges stood out:
+                <li>API integration difficulties: Using an external API like Spoonacular for specific plant-based product data was much more complicated than expected.</li>
+                <li>Data visualization learning curve: D3.js, though powerful, required an understanding of how to structure data and bind it to visual elements.</li>
+                <li>Design consistency: Maintaining a consistent and appealing design while working with various web technologies was a balancing act.</li>
+                In the final phase, I ensured that both visualizations were fully functional and polished. 
+            </p>
+            <h2>Wireframes:</h2>
+            <img class="essay-image" src="images/1.png">
+            <img class="essay-image" src="images/2.png">
+            <img class="essay-image" src="images/3.png">
+            <img class="essay-image" src="images/4.png">
+            <img class="essay-image" src="images/5.png">
+            <img class="essay-image" src="images/6.png">
+            <img class="essay-image" src="images/7.png">
+            <img class="essay-image" src="images/8.png">
+            <p>Key Design Elements:
+                <li>Main sections: Included a data page with interactive data visualizations, a blog page, and a profile page introducing myself.</li>
+                <li>Profile section: The profile page features a large cartoon image of myself with a speech bubble saying, “Hi, I’m Kaycee Chantelle & I am passionate about living a plant-based lifestyle. Here is why…” This section was designed to make the website personal and engaging.</li>
+            </p>
+            <p>Profile Page with Typewriter Animation
+                <li>The next step was adding a typewriter animation to the speech bubble on the profile page. This effect was achieved using D3.js to create a dynamic experience. The animation provided an interactive and fun introduction to the page.</li>
+                <li>Profile section: The profile page features a large cartoon image of myself with a speech bubble saying, “Hi, I’m Kaycee Chantelle & I am passionate about living a plant-based lifestyle. Here is why…” This section was designed to make the website personal and engaging.</li>
+            </p>
+            <p>More info about data visualisation complications: Initially, I planned to use the Spoonacular API to pull data for the plant-based product visualization. However, after exploring the API, I encountered several challenges, such as complex API integration and the inconsistency of the available data. Due to these complications, I decided to manually create a JSON file for the data, sourcing statistics on plant-based lifestyles from trusted websites.</p>
+            <p>API limitations: The Spoonacular API did not provide structured, reliable, or real-time plant-based data that I needed. As a result, I switched to manually creating a .json file to store the data from trusted sources. This approach gave me full control over the data and its structure, eliminating the need to rely on third-party APIs.</p>
+            <p>Sources of data for the visualizations:
+                <li><a href="https://en.wikipedia.org/wiki/Vegetarianism_by_country">Vegetarianism by country</a></li>
+                <li><a href="https://worldpopulationreview.com/country-rankings/veganism-by-country">World population Review - Veganism by country</a></li>
+                <li><a href="https://worldpopulationreview.com/country-rankings/vegetarianism-by-country">World population Review - Vegetarianism by country</a></li>
+            </p>
+            <p>Data Visualization (D3.js): 
+                To display the data, I used D3.js to create interactive visualizations.
+                <li>Line Graph Visualization: The line graph shows trends over time in the growth of vegans and vegetarians worldwide. Includes hover interactions.</li>
+                <li>Bar Graph Visualization: The bar graph compares the number of vegans and vegetarians by continent. D3.js was used to create the graph, with hover interactions that display additional data for each bar.</li>
+            </p>
+            <h3>References:</h3>
+            <p>Throughout the development process, I relied on various tutorials and documentation to enhance my understanding of D3.js, data visualization, and web design.</p>
+            <ul>
+                <li><a href="https://d3js.org/">D3.js documentation</a></li>
+                <li><a href="https://www.youtube.com/watch?v=_8V5o2UHG0E">Data Visualization with D3.js - Full Tutorial Course</a></li>
+                <li><a href="https://youtu.be/bp2GF8XcJdY?si=kX3lxpSFLCU8a7SZ">D3.js in 100 Seconds</a></li>
+                <li><a href="https://youtu.be/mU6anWqZJcc?si=EXM0v5NC7BIFBdCH">Learn HTML5 and CSS3 From Scratch - Full Course</a></li>
+                <li><a href="https://developer.mozilla.org/en-US/">Resources for Developers,by Developers</a></li>
+                <li><a href="https://www.who.int/health-topics/coronavirus#tab=tab_1">Coronavirus disease (COVID-19)</a></li>
+                
+            </ul>   
+        </article>
+
+
     </main>
 
     <footer>
