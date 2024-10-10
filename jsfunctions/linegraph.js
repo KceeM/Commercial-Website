@@ -43,12 +43,12 @@ function createLineGraph(data) {
     const lineVegans = d3.line()
         .defined(d => d.vegans_percentage !== null)
         .x(d => x(d.country) + x.bandwidth() / 2)
-        .y(d => y(d.vegans_percentage || 0));
+        .y(d => y(d.vegans_percentage));
 
     const lineVegetarians = d3.line()
         .defined(d => d.vegetarians_percentage !== null)
         .x(d => x(d.country) + x.bandwidth() / 2)
-        .y(d => y(d.vegetarians_percentage || 0));
+        .y(d => y(d.vegetarians_percentage));
     
 
     // vegetarian lines first
