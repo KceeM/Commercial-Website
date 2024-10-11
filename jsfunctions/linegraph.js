@@ -37,14 +37,14 @@ function createLineGraph(data) {
         .style("text-anchor", "end")  // Align text
         .attr("dx", "-0.8em")  // Adjust horizontal pos
         .attr("dy", "0.15em")  // Adjust vertical pos
-        .attr("transform", "rotate(-65)");  // Rotate text at an angle of -90 degrees
+        .attr("transform", "rotate(-65)");  // Rotate text at an angle of -65 degrees(wanted 90 but it did not look good)
         
 
     svg.append("g")
         .attr("class", "y-axis")
         .call(d3.axisLeft(y));
 
-    // Line generators for vegans and vegetarians
+    // line generators for vegans and vegetarians
     const lineVegans = d3.line()
         .x(d => x(d.country) + x.bandwidth() / 2)
         .y(d => y(d.vegans_percentage));
@@ -76,7 +76,7 @@ function createLineGraph(data) {
     // Tooltip functionality for vegans and vegetarians
     const tooltip = d3.select("#tooltip1");
 
-    // Adds circles for vegans
+    // circles for vegans
     svg.selectAll(".dot-vegans")
         .data(data)
         .enter().append("circle")
@@ -97,7 +97,7 @@ function createLineGraph(data) {
             tooltip.style("visibility", "hidden");
         });
 
-    // Add circles for vegetarians
+    // circles for vegetarians
     svg.selectAll(".dot-vegetarians")
         .data(data)
         .enter().append("circle")
