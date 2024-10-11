@@ -8,7 +8,7 @@
     <meta name="author" content="Kaycee Chantelle Mashilo">
     <title>Home</title>
     <link rel="stylesheet" href="css/main.css">
-    
+    <link rel="stylesheet" href="css/recipe.css">
 </head>
 <body>
     <header>
@@ -20,34 +20,98 @@
             <nav>
                 <button id="homeBtn">Home</button>
                 <button id="blogsBtn">Blogs</button>
-                <button id="recipesBtn">Recipes</button>
+                <button id="recipesBtn">Shop & Recipes</button>
                 <button id="dataBtn">Data</button>
                 <button id="profileBtn">Profile</button>
                 <button id="designBtn">Design</button>
-                <button id="theoryBtn">Theory</button>
+                <button id="theorysBtn">Theory</button>
                
             </nav>
         </section>
     
     </header>
 
-    <section id="intro-section" aria-label="Introduction Section">
-        <h1 id="title-text">The Vegan Vitality</h1>
+    <section id="heading-section" aria-label="heading Section">
+        <h1 id="heading-text">Recipes & Shop</h1>
     </section>
 
     <main>
-        <section id="intro" class="intro-section">
-            <article class="intro-text">
-                <h2>Welcome to The Vegan Vitality</h2>
-                <p>Discover a vibrant world of plant-based goodness. Explore delicious, nutrient-packed recipes designed to fuel your body and soul, all while being kind to the planet.</p>
+        <h2>Welcome to The Vegan Vitality Recipes</h2>
+        <p>Discover a vibrant world of plant-based goodness. Explore delicious, nutrient-packed recipes 
+       <section id="recipes-container"></section>
+
+       <section aria-labelledby="products-section">
+        <h2 id="products-section">Woolworths Plant-Based Products</h2>
+        <p>Check out these plant-based products available at Woolworths. Click "Add to Cart" to be redirected to the Woolworths page for purchase.</p>
+
+        <section class="products-container">
+            <!-- Product 1 -->
+            <article class="product-card">
+                <img src="images/PlantLove-Swiss-Chard-Sweetcorn-Butter-Bean-Rounds.jpg">
+                <h3>PlantLove™ Swiss Chard, Sweetcorn & Butter Bean Rounds 4 pk</h3>
+                <p>R49.99</p>
+                <a href="https://www.woolworths.co.za/prod/Food/Ready-Meals/Plant-Based-Meals/PlantLove-Swiss-Chard-Sweetcorn-Butter-Bean-Rounds-4-pk/_/A-20201814?isFromPLP=true" class="product-button">Add to Cart</a>
             </article>
-            
-            <figure class="intro-image">
-                <img src="images/F1.png" alt="Plant-based dish image">
-                <figcaption>A delicious plant-based dish</figcaption>
-            </figure>
+
+            <!-- Product 2 -->
+            <article class="product-card">
+                <img src="images/PlantLove-Minced-Soya-180-g.jpg">
+                <h3>PlantLove™ Minced Soya 180 g</h3>
+                <p>R52.99</p>
+                <a href="https://www.woolworths.co.za/prod/Food/Meat-Poultry-Fish/Mince-Meatballs/PlantLove-Minced-Soya-180-g/_/A-6009214014715?isFromPLP=true" class="product-button">Add to Cart</a>
+            </article>
+
+            <!-- Product 3 -->
+            <article class="product-card">
+                <img src="images/PlantLove-Crumbed-Savoury-Soya-Portions-200-g.jpg">
+                <h3>PlantLove™ Crumbed Savoury Soya Portions 200 g</h3>
+                <p>R52.99</p>
+                <a href="https://www.woolworths.co.za/prod/Food/Meat-Poultry-Fish/Poultry/Crumbed/PlantLove-Crumbed-Savoury-Soya-Portions-200-g/_/A-6009214014845?isFromPLP=true" class="product-button">Add to Cart</a>
+            </article>
+
+            <!-- Product 4 -->
+            <article class="product-card">
+                <img src="images/Frozen-PlantLove-Soya-Rounds-320-g.jpg">
+                <h3>Frozen PlantLove™ Soya Rounds 320 g</h3>
+                <p>R89.99</p>
+                <a href="https://www.woolworths.co.za/prod/Food/Ready-Meals/Plant-Based-Meals/Frozen-PlantLove-Soya-Rounds-320-g/_/A-6009217300488?isFromPLP=true" class="product-button">Add to Cart</a>
+            </article>
+
+            <!-- Product 5 -->
+            <article class="product-card">
+                <img src="images/Vegetarian-Butter-Curry-350-g.jpg">
+                <h3>Vegetarian™ Butter Curry 350 g</h3>
+                <p>R109.99</p>
+                <a href="https://www.woolworths.co.za/prod/Food/Wellbeing-Plant-Based/Dietary-Lifestyle-Choices/High-in-Protein/Vegetarian-Butter-Curry-350-g/_/A-6009214798929?isFromPLP=true" class="product-button">Add to Cart</a>
+            </article>
+
+            <!-- Product 6 -->
+            <article class="product-card">
+                <img src="images/Vegetarian-Biryani-350-g.jpg">
+                <h3>Vegetarian™ Biryani 350 g</h3>
+                <p>R99.99</p>
+                <a href="https://www.woolworths.co.za/prod/Food/Wellbeing-Plant-Based/Plant-Based-Alternatives/Vegetarian/Food-To-Go/Vegetarian-Biryani-350-g/_/A-6009214798943?isFromPLP=true" class="product-button">Add to Cart</a>
+            </article>
+
+            <!-- Product 7 -->
+            <article class="product-card">
+                <img src="images/PlantLove-Butternut-Girasoli-250-g.jpg">
+                <h3>PlantLove™ Butternut Girasoli 250 g</h3>
+                <p>R86.99</p>
+                <a href="https://www.woolworths.co.za/prod/Food/Promotions/Buy-2-Or-More-And-Save/Buy-any-2-Save-20-/Filled-Flat-Pasta-And-Sauce/PlantLove-Butternut-Girasoli-250-g/_/A-6009223966326?isFromPLP=true" class="product-button">Add to Cart</a>
+            </article>
+
+            <!-- Product 8 -->
+            <article class="product-card">
+                <img src="images/PlantLove-Yellow-Coconut-Curry-350-g.jpg">
+                <h3>PlantLove™ Yellow Coconut Curry 350 g</h3>
+                <p>R99.99</p>
+                <a href="https://www.woolworths.co.za/prod/Food/Wellbeing-Plant-Based/Plant-Based-Alternatives/Vegetarian/Ready-Meals/PlantLove-Yellow-Coconut-Curry-350-g/_/A-6009226769047?isFromPLP=true" class="product-button">Add to Cart</a>
+            </article>
         </section>
+    
     </main>
+    
 
     <footer>
         <section class="container">
@@ -60,6 +124,9 @@
         </section>
     </footer>
 
+
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="jsfunctions/recipes.js"></script>
     <script src="jsfunctions/function.js"></script>
     
 </body>

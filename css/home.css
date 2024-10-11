@@ -36,7 +36,7 @@
 
 .intro-text {
     flex: 1; 
-    font-size: 2rem; /* Increase the font size here */
+    font-size: 1.5rem; /* Increase the font size here */
     line-height: 1.5;
     max-width: 600px;
     padding-left: 50px;
@@ -54,13 +54,16 @@
     padding: 20px;
     background-color: #f8f8f8;
     border-radius: 10px;
+    margin-bottom: 100px;
+    margin-top: 200px;
+    
 }
 
 .blog-preview {
     width: 30%;
     padding: 20px;
     border: 1px solid orange;
-    background-color: #fff;
+    background-color: #feffbf;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
     border-radius: 20px;
@@ -68,11 +71,12 @@
     color: inherit; 
     transition: transform 0.3s;
     
+    
 }
 
 .blog-preview:hover {
     transform: scale(1.05); 
-    background-color: rgb(206, 230, 255);
+    background-color: rgb(130, 233, 130);
 }
 
 .blog-preview h2 {
@@ -90,15 +94,11 @@
     padding: 10px 20px;
     font-size: 1em;
     background-color: greenyellow;
-    color: #ffffff;
-    border: 1px solid greenyellow;
-    border-radius: 20px;
+    color: #000000;
+    border: 1px solid orange;
     cursor: pointer;
 }
 
-.blog-preview button:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
-}
+
 
 
