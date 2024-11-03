@@ -1,9 +1,16 @@
 document.addEventListener('DOMContentLoaded', function() {
-    d3.json("veganvegetariandata.json").then(function(veganData) {
-        createLineGraph(veganData);
-    }).catch(function(error) {
-        console.error("Error loading vegan data:", error);
-    });
+    fetch("http://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json")
+        .then(response => response.json())
+        .then(data => {
+            // Process data here to match the structure expected in createLineGraph
+            const processedData = data[1].map(item => ({
+                country: item.country.value,
+                vegans_percentage: item.vegans_percentage || 0,
+                vegetarians_percentage: item.vegetarians_percentage || 0,
+            }));
+            createLineGraph(processedData);
+        })
+        .catch(error => console.error("Error fetching World Bank data:", error));
 });
 
 function createLineGraph(data) {
