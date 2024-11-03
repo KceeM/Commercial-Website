@@ -13,6 +13,19 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => console.error("Error fetching World Bank data:", error));
 });
 
+
+/**
+ * @typedef {Object} CountryData
+ * @property {string} country - name.
+ * @property {number} vegans_percentage - Percentage of vegans.
+ * @property {number} vegetarians_percentage - Percentage of vegetarians.
+ */
+
+/**
+ * this creates the line graph of both percentages by country.
+ * @param {CountryData[]} data - array of country data.
+ */
+
 function createLineGraph(data) {
     const margin = {top: 20, right: 30, bottom: 30, left: 40};
     const width = 800 - margin.left - margin.right;
