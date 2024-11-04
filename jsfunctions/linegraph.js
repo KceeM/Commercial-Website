@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    fetch("http://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json")
+    fetch("https://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json")
         .then(response => response.json())
         .then(data => {
             
