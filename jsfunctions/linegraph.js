@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch("http://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json")
         .then(response => response.json())
         .then(data => {
-            // Process data here to match the structure expected in createLineGraph
+            
             const processedData = data[1].map(item => ({
                 country: item.country.value,
                 vegans_percentage: item.vegans_percentage || 0,
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
 const processedData = [
     { country: "Country1", vegans_percentage: 5, vegetarians_percentage: 10 },
     { country: "Country2", vegans_percentage: 15, vegetarians_percentage: 20 },
-    // Add more sample countries as needed
+    
 ];
 
 
