@@ -44,7 +44,7 @@ function createLineGraph(data) {
         .append("g")
         .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-    const x = d3.scaleBand()
+    const x = d3.scalePoint()
         .domain(data.map(d => d.country))
         .range([0, width])
         .padding(0.1);
