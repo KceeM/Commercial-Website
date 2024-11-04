@@ -13,6 +13,12 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => console.error("Error fetching World Bank data:", error));
 });
 
+const processedData = [
+    { country: "Country1", vegans_percentage: 5, vegetarians_percentage: 10 },
+    { country: "Country2", vegans_percentage: 15, vegetarians_percentage: 20 },
+    // Add more sample countries as needed
+];
+
 
 /**
  * @typedef {Object} CountryData
