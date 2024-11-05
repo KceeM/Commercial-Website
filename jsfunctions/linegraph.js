@@ -1,17 +1,17 @@
+function getRandomHealthScore() {
+    return Math.floor(Math.random() * (100 - 50 + 1)) + 50; // Generates a score between 50 and 100
+}
+
 document.addEventListener('DOMContentLoaded', async function() {
     try {
-        const response = await fetch("https://api.spoonacular.com/recipes/complexSearch?diet=vegan&apiKey=ef0323f5045049b28c111ce2a02c9687");
+        const response = await fetch("https://api.spoonacular.com/recipes/complexSearch?diet=vegan&number=30&apiKey=ef0323f5045049b28c111ce2a02c9687"); // Fetch more recipes
         const data = await response.json();
 
-        const recipes = await Promise.all(data.results.map(async (item, index) => {
-            const recipeResponse = await fetch(`https://api.spoonacular.com/recipes/${item.id}/information?apiKey=ef0323f5045049b28c111ce2a02c9687`);
-            const recipeData = await recipeResponse.json();
-
-            return {
-                name: recipeData.title,
-                popularity: recipeData.spoonacularScore ?? recipeData.healthScore ?? 0,
-                rank: index + 1
-            };
+        // Process the recipes
+        const recipes = data.results.map((item, index) => ({
+            name: item.title,
+            popularity: getRandomHealthScore(), // Use random score instead of healthScore
+            rank: index + 1
         }));
 
         createLineGraph(recipes);
@@ -52,7 +52,7 @@ function createLineGraph(data) {
         .style("text-anchor", "end")  // Align text
         .attr("dx", "-0.8em")  // Adjust horizontal pos
         .attr("dy", "0.15em")  // Adjust vertical pos
-        .attr("transform", "rotate(-45)")  // Rotate text at an angle of -65 degrees(wanted 90 but it did not look good)
+        .attr("transform", "rotate(-70)")  // Rotate text at an angle of -65 degrees(wanted 90 but it did not look good)
         .style("white-space", "nowrap");
 
     // This is for y-axis
