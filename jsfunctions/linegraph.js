@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     .then(data => {
         const processedData = data.results.map((item, index) => ({
             name: item.title,
-            popularity: item.spoonacularScore  || item.healthScore,
+            popularity: item.spoonacularScore  || item.aggregateLikes || item.healthScore,
             rank: index + 1  
         }));
         createLineGraph(processedData);
