@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 function createLineGraph(data) {
-    const margin = {top: 20, right: 30, bottom: 80, left: 50};
+    const margin = {top: 20, right: 30, bottom: 80, left: 60};
     const width = 800 - margin.left - margin.right;
     const height = 400 - margin.top - margin.bottom;
 
@@ -39,7 +39,7 @@ function createLineGraph(data) {
     svg.append("g")
         .attr("class", "x-axis")
         .attr("transform", `translate(0, ${height})`)
-        .call(d3.axisBottom(x).tickFormat((d, i) => data[i].name))
+        .call(d3.axisBottom(x).ticks(data.length).tickFormat((d, i) => data[i] ? data[i].name : ""))
         .selectAll("text")  
         .style("text-anchor", "end")  // Align text
         .attr("dx", "-0.8em")  // Adjust horizontal pos

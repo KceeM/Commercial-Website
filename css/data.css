@@ -143,10 +143,14 @@ svg {
 
 #tooltip1 {
     position: absolute;
-    visibility: hidden;
-    background-color: lightgray;
-    padding: 5px;
-    border: 1px solid black;
-    border-radius: 5px;
-    font-size: 12px;
+    background-color: rgba(0, 0, 0, 0.75); 
+    color: white;
+    padding: 8px;
+    border-radius: 4px;
+    pointer-events: none; /* Prevents tooltip from interfering with mouse interactions */
+    opacity: 0; /* hidden at first*/
+    transition: opacity 0.3s ease; /* fade-in effect */
+    font-size: 14px;
+    z-index: 10;
+
 }
