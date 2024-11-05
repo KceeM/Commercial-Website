@@ -2,11 +2,14 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch("https://api.spoonacular.com/recipes/complexSearch?diet=vegan&apiKey=ef0323f5045049b28c111ce2a02c9687")
     .then(response => response.json())
     .then(data => {
-        const processedData = data.results.map((item, index) => ({
-            name: item.title,
-            popularity: item.spoonacularScore  || item.aggregateLikes || item.healthScore,
-            rank: index + 1  
-        }));
+        const processedData = data.results
+            .map((item, index) => ({
+                name: item.title,
+                popularity: item.spoonacularScore ?? item.healthScore ?? 0,  // Uses healthScore if spoonacularScore is missing, or default to 0
+                rank: index + 1  
+            }))
+            .filter(item => item.popularity !== undefined && !isNaN(item.popularity)); // Ensures that there are valid popularity values
+
         createLineGraph(processedData);
     })
     .catch(error => console.error("Error fetching data:", error));
