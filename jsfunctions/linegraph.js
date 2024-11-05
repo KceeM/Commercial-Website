@@ -35,7 +35,7 @@ function createLineGraph(data) {
         .nice()
         .range([height, 0]);
 
-    // Adds axes
+    // Adds axes, this is for x-axis
     svg.append("g")
         .attr("class", "x-axis")
         .attr("transform", `translate(0, ${height})`)
@@ -44,9 +44,9 @@ function createLineGraph(data) {
         .style("text-anchor", "end")  // Align text
         .attr("dx", "-0.8em")  // Adjust horizontal pos
         .attr("dy", "0.15em")  // Adjust vertical pos
-        .attr("transform", "rotate(-65)");  // Rotate text at an angle of -65 degrees(wanted 90 but it did not look good)
-        
-
+        .attr("transform", "rotate(-65)")  // Rotate text at an angle of -65 degrees(wanted 90 but it did not look good)
+        .style("white-space", "nowrap");
+    // This is for y-axis
     svg.append("g")
         .attr("class", "y-axis")
         .call(d3.axisLeft(y));
@@ -68,7 +68,21 @@ function createLineGraph(data) {
         .style("stroke", "green")
         .style("stroke-width", 2);
 
-    
+    svg.selectAll(".dot")
+        .data(data)
+        .enter().append("circle")
+        .attr("class", "dot")
+        .attr("cx", d => x(d.rank))
+        .attr("cy", d => y(d.popularity))
+        .attr("r", 5)
+        .style("fill", "orange")
+        .on("mouseover", (event, d) => {
+            tooltip.style("opacity", 1)
+                   .html(`Recipe: ${d.name}<br>Popularity: ${d.popularity}`)
+                   .style("left", `${event.pageX + 10}px`)
+                   .style("top", `${event.pageY - 30}px`);
+        })
+        .on("mouseout", () => tooltip.style("opacity", 0));
         
 
 }
