@@ -1,36 +1,17 @@
 document.addEventListener('DOMContentLoaded', function() {
-    fetch("https://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json")
-        .then(response => response.json())
-        .then(data => {
-            
-            const processedData = data[1].map(item => ({
-                country: item.country.value,
-                vegans_percentage: item.vegans_percentage || 0,
-                vegetarians_percentage: item.vegetarians_percentage || 0,
-            }));
-            createLineGraph(processedData);
-        })
-        .catch(error => console.error("Error fetching World Bank data:", error));
+    fetch("https://api.spoonacular.com/recipes/complexSearch?diet=vegan&apiKey=ef0323f5045049b28c111ce2a02c9687")
+    .then(response => response.json())
+    .then(data => {
+        const processedData = data.results.map((item, index) => ({
+            name: item.title,
+            popularity: item.spoonacularScore,
+            rank: index + 1  
+        }));
+        createLineGraph(processedData);
+    })
+    .catch(error => console.error("Error fetching data:", error));
 });
 
-const processedData = [
-    { country: "Country1", vegans_percentage: 5, vegetarians_percentage: 10 },
-    { country: "Country2", vegans_percentage: 15, vegetarians_percentage: 20 },
-    
-];
-
-
-/**
- * @typedef {Object} CountryData
- * @property {string} country - name.
- * @property {number} vegans_percentage - Percentage of vegans.
- * @property {number} vegetarians_percentage - Percentage of vegetarians.
- */
-
-/**
- * this creates the line graph of both percentages by country.
- * @param {CountryData[]} data - array of country data.
- */
 
 function createLineGraph(data) {
     const margin = {top: 20, right: 30, bottom: 30, left: 40};
@@ -45,12 +26,12 @@ function createLineGraph(data) {
         .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
     const x = d3.scalePoint()
-        .domain(data.map(d => d.country))
+        .domain(data.map(d => d.rank))
         .range([0, width])
         .padding(0.1);
 
     const y = d3.scaleLinear()
-        .domain([0, d3.max(data, d => Math.max(d.vegans_percentage, d.vegetarians_percentage))])
+        .domain([0, d3.max(data, d => d.popularity)])
         .nice()
         .range([height, 0]);
 
@@ -58,7 +39,7 @@ function createLineGraph(data) {
     svg.append("g")
         .attr("class", "x-axis")
         .attr("transform", `translate(0, ${height})`)
-        .call(d3.axisBottom(x))
+        .call(d3.axisBottom(x).tickFormat((d, i) => data[i].name))
         .selectAll("text")  
         .style("text-anchor", "end")  // Align text
         .attr("dx", "-0.8em")  // Adjust horizontal pos
@@ -70,98 +51,24 @@ function createLineGraph(data) {
         .attr("class", "y-axis")
         .call(d3.axisLeft(y));
 
-    // line generators for vegans and vegetarians
-    const lineVegans = d3.line()
-        .x(d => x(d.country) + x.bandwidth() / 2)
-        .y(d => y(d.vegans_percentage));
+    const line = d3.line()
+        .x(d => x(d.rank))
+        .y(d => y(d.popularity));
 
-    const lineVegetarians = d3.line()
-        .x(d => x(d.country) + x.bandwidth() / 2)
-        .y(d => y(d.vegetarians_percentage));
-
-        
-
-    // vegetarian lines first
-    svg.append("path")
-       .datum(data)
-       .attr("class", "line vegetarians")
-       .attr("d", lineVegetarians)
-       .style("fill", "none")
-       .style("stroke", "orange")
-       .style("stroke-width", 2);
-
-    //vegan lines 2nd
-    svg.append("path")
-       .datum(data)
-       .attr("class", "line vegans")
-       .attr("d", lineVegans)
-       .style("fill", "none")
-       .style("stroke", "greenyellow")
-       .style("stroke-width", 2);
+    
 
     // Tooltip functionality for vegans and vegetarians
     const tooltip = d3.select("#tooltip1");
 
-    // circles for vegans
-    svg.selectAll(".dot-vegans")
-        .data(data)
-        .enter().append("circle")
-        .attr("class", "dot-vegans")
-        .attr("cx", d => x(d.country) + x.bandwidth() / 2)
-        .attr("cy", d => y(d.vegans_percentage))
-        .attr("r", 5)
-        .style("fill", "green")
-        .on("mouseover", function(event, d) {
-            tooltip.style("visibility", "visible")
-                .html(`${d.country}<br>Vegans: ${d.vegans_percentage}%`);
-        })
-        .on("mousemove", function(event) {
-            tooltip.style("top", (event.pageY - 10) + "px")
-                .style("left", (event.pageX + 10) + "px");
-        })
-        .on("mouseout", function() {
-            tooltip.style("visibility", "hidden");
-        });
+    svg.append("path")
+        .datum(data)
+        .attr("class", "line")
+        .attr("d", line)
+        .style("fill", "none")
+        .style("stroke", "green")
+        .style("stroke-width", 2);
 
-    // circles for vegetarians
-    svg.selectAll(".dot-vegetarians")
-        .data(data)
-        .enter().append("circle")
-        .attr("class", "dot-vegetarians")
-        .attr("cx", d => x(d.country) + x.bandwidth() / 2)
-        .attr("cy", d => y(d.vegetarians_percentage))
-        .attr("r", 5)
-        .style("fill", "orange")
-        .on("mouseover", function(event, d) {
-            tooltip.style("visibility", "visible")
-                .html(`${d.country}<br>Vegetarians: ${d.vegetarians_percentage}%`);
-        })
-        .on("mousemove", function(event) {
-            tooltip.style("top", (event.pageY - 10) + "px")
-                .style("left", (event.pageX + 10) + "px");
-        })
-        .on("mouseout", function() {
-            tooltip.style("visibility", "hidden");
-        });
-
-    //x-axis label
-    svg.append("text")
-        .attr("text-anchor", "middle")
-        .attr("x", width / 2)
-        .attr("y", height + margin.bottom + 50) // Position below the axis
-        .text("Countries")
-        .style("font-size", "14px")
-        .style("fill", "black");
-
-    //y-axis label
-    svg.append("text")
-        .attr("text-anchor", "middle")
-        .attr("transform", "rotate(-90)")
-        .attr("x", -height / 2)
-        .attr("y", -margin.left + 10) // Position to the left of the axis
-        .text("Percentage Values")
-        .style("font-size", "14px")
-        .style("fill", "black");
+    
         
 
 }
