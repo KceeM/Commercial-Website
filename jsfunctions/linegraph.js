@@ -1,18 +1,23 @@
-document.addEventListener('DOMContentLoaded', function() {
-    fetch("https://api.spoonacular.com/recipes/complexSearch?diet=vegan&apiKey=ef0323f5045049b28c111ce2a02c9687")
-    .then(response => response.json())
-    .then(data => {
-        const processedData = data.results
-            .map((item, index) => ({
-                name: item.title,
-                popularity: item.spoonacularScore ?? item.healthScore ?? 0,  // Uses healthScore if spoonacularScore is missing, or default to 0
-                rank: index + 1  
-            }))
-            .filter(item => item.popularity !== undefined && !isNaN(item.popularity)); // Ensures that there are valid popularity values
+document.addEventListener('DOMContentLoaded', async function() {
+    try {
+        const response = await fetch("https://api.spoonacular.com/recipes/complexSearch?diet=vegan&apiKey=ef0323f5045049b28c111ce2a02c9687");
+        const data = await response.json();
 
-        createLineGraph(processedData);
-    })
-    .catch(error => console.error("Error fetching data:", error));
+        const recipes = await Promise.all(data.results.map(async (item, index) => {
+            const recipeResponse = await fetch(`https://api.spoonacular.com/recipes/${item.id}/information?apiKey=ef0323f5045049b28c111ce2a02c9687`);
+            const recipeData = await recipeResponse.json();
+
+            return {
+                name: recipeData.title,
+                popularity: recipeData.spoonacularScore ?? recipeData.healthScore ?? 0,
+                rank: index + 1
+            };
+        }));
+
+        createLineGraph(recipes);
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    }
 });
 
 
