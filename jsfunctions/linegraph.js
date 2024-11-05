@@ -52,7 +52,7 @@ function createLineGraph(data) {
         .style("text-anchor", "end")  // Align text
         .attr("dx", "-0.8em")  // Adjust horizontal pos
         .attr("dy", "0.15em")  // Adjust vertical pos
-        .attr("transform", "rotate(-70)")  // Rotate text at an angle of -65 degrees(wanted 90 but it did not look good)
+        .attr("transform", "rotate(-80)")  // Rotate text at an angle of -65 degrees(wanted 90 but it did not look good)
         .style("white-space", "nowrap");
 
     // This is for y-axis
