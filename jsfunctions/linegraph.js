@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     .then(data => {
         const processedData = data.results.map((item, index) => ({
             name: item.title,
-            popularity: item.spoonacularScore,
+            popularity: item.spoonacularScore  || item.healthScore,
             rank: index + 1  
         }));
         createLineGraph(processedData);
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 function createLineGraph(data) {
-    const margin = {top: 20, right: 30, bottom: 30, left: 40};
+    const margin = {top: 20, right: 30, bottom: 80, left: 50};
     const width = 800 - margin.left - margin.right;
     const height = 400 - margin.top - margin.bottom;
 
@@ -25,17 +25,17 @@ function createLineGraph(data) {
         .append("g")
         .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-    const x = d3.scalePoint()
-        .domain(data.map(d => d.rank))
-        .range([0, width])
-        .padding(0.1);
+    
+    const x = d3.scaleLinear()
+        .domain([1, data.length])  // linear scale for ranks
+        .range([0, width]);
 
     const y = d3.scaleLinear()
         .domain([0, d3.max(data, d => d.popularity)])
         .nice()
         .range([height, 0]);
 
-    // Adds axes, this is for x-axis
+    // Adds axes, this is for x-axis & text rotation
     svg.append("g")
         .attr("class", "x-axis")
         .attr("transform", `translate(0, ${height})`)
@@ -44,21 +44,19 @@ function createLineGraph(data) {
         .style("text-anchor", "end")  // Align text
         .attr("dx", "-0.8em")  // Adjust horizontal pos
         .attr("dy", "0.15em")  // Adjust vertical pos
-        .attr("transform", "rotate(-65)")  // Rotate text at an angle of -65 degrees(wanted 90 but it did not look good)
+        .attr("transform", "rotate(-45)")  // Rotate text at an angle of -65 degrees(wanted 90 but it did not look good)
         .style("white-space", "nowrap");
+
     // This is for y-axis
     svg.append("g")
         .attr("class", "y-axis")
         .call(d3.axisLeft(y));
 
+    // Line path
     const line = d3.line()
         .x(d => x(d.rank))
         .y(d => y(d.popularity));
 
-    
-
-    // Tooltip functionality for vegans and vegetarians
-    const tooltip = d3.select("#tooltip1");
 
     svg.append("path")
         .datum(data)
@@ -68,6 +66,9 @@ function createLineGraph(data) {
         .style("stroke", "green")
         .style("stroke-width", 2);
 
+
+    // Tooltip functionality
+    const tooltip = d3.select("#tooltip1");
     svg.selectAll(".dot")
         .data(data)
         .enter().append("circle")
