@@ -4,7 +4,7 @@ function getRandomHealthScore() {
 
 document.addEventListener('DOMContentLoaded', async function() {
     try {
-        const response = await fetch("https://api.spoonacular.com/recipes/complexSearch?diet=vegan&number=30&apiKey=ef0323f5045049b28c111ce2a02c9687"); // Fetch more recipes
+        const response = await fetch("https://api.spoonacular.com/recipes/complexSearch?diet=vegan&number=30&apiKey=b2cb30794d014fe595b6f84ff7a1f97a"); // Fetch more recipes
         const data = await response.json();
 
         // Process the recipes
@@ -71,7 +71,7 @@ function createLineGraph(data) {
         .attr("class", "line")
         .attr("d", line)
         .style("fill", "none")
-        .style("stroke", "green")
+        .style("stroke", "orange")
         .style("stroke-width", 2);
 
 
