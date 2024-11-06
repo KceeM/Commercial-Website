@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', async function() {
     try {
-        // Fetching plant-based food data from Spoonacular API (replace with your own API key)
+        // Fetching plant-based food data from Spoonacular API
         const apiKey = 'b2cb30794d014fe595b6f84ff7a1f97a';
         const response = await fetch(`https://api.spoonacular.com/foods/ingredients?apiKey=${apiKey}`);
         
@@ -9,12 +9,12 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
 
         const data = await response.json();
-        console.log("Raw data fetched:", data);  // Debugging
+        console.log("Raw data fetched:", data);  
 
-        // Take first few items for the bar graph (you can modify this as needed)
+        
         const filteredData = data.slice(0, 5).map(item => ({
             name: item.name,
-            calories: item.calories || 0  // If no calories data is found, set to 0
+            calories: item.calories || 0  
         }));
 
         console.log("Processed Data:", filteredData);
