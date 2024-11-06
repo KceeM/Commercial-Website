@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', async function() {
     try {
         // Fetches chronic disease data from CDC
-        const response = await fetch('https://chronicdata.cdc.gov/resource/u93h-quup.json?$limit=10&$where=category="Diabetes"');
+        const response = await fetch('https://chronicdata.cdc.gov/resource/u93h-quup.json?$limit=10&category=Diabetes');
         
         if (!response.ok) {
             throw new Error("Failed to fetch data from CDC Chronic Disease Indicators API");
