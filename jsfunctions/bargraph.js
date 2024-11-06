@@ -1,16 +1,14 @@
 document.addEventListener('DOMContentLoaded', async function() {
     try {
-        
-        const response = await fetch('https://chronicdata.cdc.gov/resource/u93h-quup.json?$limit=5&$where=category="Diabetes"');
+        const response = await fetch('https://chronicdata.cdc.gov/resource/u93h-quup.json?$limit=5&$where=topic="Diabetes"');
         
         if (!response.ok) {
             throw new Error("Failed to fetch data from CDC Chronic Disease Indicators API");
         }
 
         const data = await response.json();
-        console.log("Raw data fetched:", data);  
+        console.log("Raw data fetched:", data);  // Debugging
 
-        
         const filteredData = data
             .filter(item => item.category === "Diabetes" && item.data_value)
             .map(item => ({
@@ -18,10 +16,8 @@ document.addEventListener('DOMContentLoaded', async function() {
                 prevalence: parseFloat(item.data_value) || 0 
             }));
 
-        
         console.log("Processed Data:", filteredData);
 
-        
         if (filteredData.length > 0) {
             createBarGraph(filteredData);
         } else {
