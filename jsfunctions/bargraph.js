@@ -1,20 +1,20 @@
 document.addEventListener('DOMContentLoaded', async function() {
     try {
-        // Fetching plant-based food data from Spoonacular API
-        const apiKey = 'b2cb30794d014fe595b6f84ff7a1f97a';
-        const response = await fetch(`https://api.spoonacular.com/foods/ingredients?apiKey=${apiKey}`);
+        const apiKey = 'b2cb30794d014fe595b6f84ff7a1f97a'; 
+        const query = "tofu, avocado, lentils, beans, kale"; 
+        const response = await fetch(`https://api.spoonacular.com/food/ingredients/search?query=${query}&apiKey=${apiKey}`);
         
         if (!response.ok) {
             throw new Error("Failed to fetch data from Spoonacular API");
         }
 
         const data = await response.json();
-        console.log("Raw data fetched:", data);  
+        console.log("Raw data fetched:", data);  // Debugging
 
-        
-        const filteredData = data.slice(0, 5).map(item => ({
+        // Map data to get food name and calories
+        const filteredData = data.ingredients.map(item => ({
             name: item.name,
-            calories: item.calories || 0  
+            calories: item.calories || 0
         }));
 
         console.log("Processed Data:", filteredData);
