@@ -1,8 +1,7 @@
 document.addEventListener('DOMContentLoaded', async function() {
     try {
-        const apiKey = 'b2cb30794d014fe595b6f84ff7a1f97a'; 
-        const query = "tofu, avocado, lentils, beans, kale"; 
-        const response = await fetch(`https://api.spoonacular.com/food/ingredients/search?query=${query}&apiKey=${apiKey}`);
+        const apiKey = 'e383cda1a82a42d1a4eb3acafa246466';  
+        const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?diet=vegetarian&number=5&addRecipeInformation=true&apiKey=${apiKey}`);
         
         if (!response.ok) {
             throw new Error("Failed to fetch data from Spoonacular API");
@@ -11,16 +10,18 @@ document.addEventListener('DOMContentLoaded', async function() {
         const data = await response.json();
         console.log("Raw data fetched:", data);  // Debugging
 
-        // Map data to get food name and calories
-        const filteredData = data.ingredients.map(item => ({
-            name: item.name,
-            calories: item.calories || 0
-        }));
+        // Process data for bar graph
+        const mealData = data.results
+            .filter(meal => meal.pricePerServing)
+            .map(meal => ({
+                name: meal.title,
+                price: meal.pricePerServing / 100  
+            }));
 
-        console.log("Processed Data:", filteredData);
+        console.log("Processed Data:", mealData);
 
-        if (filteredData.length > 0) {
-            createBarGraph(filteredData);
+        if (mealData.length > 0) {
+            createBarGraph(mealData);
         } else {
             console.error("No valid data found.");
         }
@@ -29,36 +30,55 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
 });
 
-// Creates a bar graph with D3.js
-function createBarGraph(foodData) {
-    const width = 500, height = 300;
-    const svg = d3.select(".graph-container").append("svg")
-        .attr("width", width)
-        .attr("height", height);
+// this is the function to create the bar graph using D3.js
+function createBarGraph(mealData) {
+    const width = 500, height = 300, margin = { top: 40, right: 20, bottom: 70, left: 70 };
 
-    // x and y scales for the graph
+    // SVG with margin for axes and labels
+    const svg = d3.select(".graph-container").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    // x and y axes scales
     const x = d3.scaleBand()
-        .domain(foodData.map(d => d.name))
+        .domain(mealData.map(d => d.name))
         .range([0, width])
         .padding(0.1);
     
     const y = d3.scaleLinear()
-        .domain([0, d3.max(foodData, d => d.calories)])
+        .domain([0, d3.max(mealData, d => d.price)])
         .nice()
         .range([height, 0]);
 
-    // Create bars
+    // Tooltip
+    const tooltip = d3.select("#tooltip2");
+       
+
+    // Creates the bars
     svg.selectAll(".bar")
-        .data(foodData)
+        .data(mealData)
         .enter().append("rect")
         .attr("class", "bar")
         .attr("x", d => x(d.name))
-        .attr("y", d => y(d.calories))
+        .attr("y", d => y(d.price))
         .attr("width", x.bandwidth())
-        .attr("height", d => height - y(d.calories))
-        .attr("fill", "green");
+        .attr("height", d => height - y(d.price))
+        .attr("fill", "steelblue")
+        .on("mouseover", function(event, d) {
+            tooltip.html(`Meal: ${d.name}<br>Price: $${d.price.toFixed(2)}`)
+                .style("visibility", "visible");
+        })
+        .on("mousemove", function(event) {
+            tooltip.style("top", `${event.pageY - 10}px`)
+                .style("left", `${event.pageX + 10}px`);
+        })
+        .on("mouseout", function() {
+            tooltip.style("visibility", "hidden");
+        });
 
-    // Add x-axis
+    // x-axis 
     svg.append("g")
         .attr("transform", `translate(0,${height})`)
         .call(d3.axisBottom(x))
@@ -66,7 +86,16 @@ function createBarGraph(foodData) {
         .attr("transform", "rotate(-45)")
         .style("text-anchor", "end");
 
-    // Add y-axis
+    // y-axis
     svg.append("g")
         .call(d3.axisLeft(y));
+
+
+    // y-axis text
+    svg.append("text")
+        .attr("text-anchor", "middle")
+        .attr("x", -height / 2)
+        .attr("y", -margin.left + 20)
+        .attr("transform", "rotate(-90)")
+        .text("Price ($)");
 }
