@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         const recipes = data.results.map(recipe => ({
             title: recipe.title,
             price: recipe.pricePerServing,
-            calories: recipe.nutrition.nutrients.find(n => n.name === 'Calories')?.amount || 0,
+            calories: recipe.nutrition ? recipe.nutrition.nutrients.find(n => n.name === 'Calories')?.amount || 0 : 0,
             healthScore: recipe.healthScore
         }));
 
