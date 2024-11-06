@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', async function() {
     try {
         // Fetches data from Disease Ontology API for a specific disease 
-        const response = await fetch('https://www.disease-ontology.org/api/metadata/C0011843');
+        const response = await fetch('https://www.disease-ontology.org/api/metadata/C0011843', { mode: 'no-cors' });
         
         
         if (!response.ok) {
