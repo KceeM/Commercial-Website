@@ -65,6 +65,7 @@ function setupNavigationButtons() {
         { id: 'recipesBtn', url: 'recipes.html' },
         { id: 'dataBtn', url: 'data.html' },
         { id: 'profileBtn', url: 'profile.html' },
+        { id: 'formBtn', url: 'form.html' },
         { id: 'designBtn', url: 'design.html' },
         { id: 'theorysBtn', url: 'theory.html' },
         
