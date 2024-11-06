@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 // Creates a bar graph with D3.js
 function createBarGraph(diseaseData) {
     const width = 500, height = 300;
-    const svg = d3.select("#graph-container").append("svg")
+    const svg = d3.select(".graph-container").append("svg")
         .attr("width", width)
         .attr("height", height);
 
