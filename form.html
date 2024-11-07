@@ -29,8 +29,14 @@
         </section>
     </header>
 
+    <section class="intro-section1">
+        <h2>Welcome to Our Plant-Based Community!</h2>
+        <p>Register with us to receive personalized updates on the vegetarian and vegan lifestyle. Enjoy exclusive recipes, data insights, blog highlights, and more!</p>
+        <p>Creating an account is quick and easy. Let's make a difference together!</p>
+    </section>
+
     <section class="contact-section">
-        <h2>Contact Us</h2>
+        <h2>Join the Community</h2>
         <form id="contactForm" novalidate>
             <fieldset>
                 <legend>Personal Information</legend>
@@ -55,8 +61,34 @@
                 <input type="password" id="password" name="password" aria-describedby="passwordError" required>
                 <p class="error" id="passwordError">Password must be at least 8 characters, with numbers and special characters.</p>
             </fieldset>
-    
+
             <fieldset>
+                <legend>Stay Informed: Choose Your Updates</legend>
+                <section id="updates-section">
+                    <label>
+                        <input type="checkbox" name="updates" value="recipes" aria-label="Plant-Based Recipes">
+                        Plant-Based Recipes
+                    </label><br>
+                    <label>
+                        <input type="checkbox" name="updates" value="blog_posts" aria-label="Blog Post Highlights">
+                        Blog Post Highlights
+                    </label><br>
+                    <label>
+                        <input type="checkbox" name="updates" value="nutrition_tips" aria-label="Nutrition Tips and Insights">
+                        Nutrition Tips & Insights
+                    </label><br>
+                    <label>
+                        <input type="checkbox" name="updates" value="data_insights" aria-label="Data Insights and Reports">
+                        Data Insights & Reports
+                    </label><br>
+                    <label>
+                        <input type="checkbox" name="updates" value="community_news" aria-label="Community News and Events">
+                        Community News & Events
+                    </label>
+                </section>
+              </fieldset>
+            
+            <fieldset>  
                 <legend>Message</legend>
     
                 <label for="message">Message:</label>

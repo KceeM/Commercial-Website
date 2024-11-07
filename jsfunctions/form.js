@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const phoneInput = document.getElementById('phone');
     const messageInput = document.getElementById('message');
     const successMessage = document.getElementById('successMessage');
+    const checkboxes = document.querySelectorAll('input[name="updates"]');
+    const checkboxError = document.getElementById('checkboxError');
 
     // patterns
     const namePattern = /^[a-zA-Z\s]+$/;
@@ -17,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
         e.preventDefault();
         let isValid = true;
 
-        // name
+        // name validation
         if (!namePattern.test(nameInput.value)) {
             showError(nameInput, 'nameError');
             isValid = false;
@@ -25,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
             hideError('nameError');
         }
 
-        // email
+        // email validation
         if (!emailPattern.test(emailInput.value)) {
             showError(emailInput, 'emailError');
             isValid = false;
@@ -33,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
             hideError('emailError');
         }
 
-        // phone no.
+        // phone no. validation
         if (!phonePattern.test(phoneInput.value)) {
             showError(phoneInput, 'phoneError');
             isValid = false;
@@ -41,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
             hideError('phoneError');
         }
 
-        // password
+        // password validation
         if (!passwordPattern.test(passwordInput.value)) {
             showError(passwordInput, 'passwordError');
             isValid = false;
@@ -57,6 +59,15 @@ document.addEventListener('DOMContentLoaded', function () {
             hideError('messageError');
         }
 
+        // Checkbox validation & it ensures at least one is checked
+        let isCheckboxChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
+        if (!isCheckboxChecked) {
+            showError(null, 'checkboxError');
+            isValid = false;
+        } else {
+            hideError('checkboxError');
+        }
+
         // If complete, show success message
         if (isValid) {
             successMessage.style.display = 'block';
@@ -65,8 +76,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function showError(input, errorId) {
+        if (input) {
+            input.classList.add('error-border');
+        }
         document.getElementById(errorId).style.display = 'block';
-        input.classList.add('error-border');
     }
 
     function hideError(errorId) {
