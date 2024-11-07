@@ -33,6 +33,7 @@ legend {
 label {
     font-size: 0.9em;
     color: #555;
+    
 }
 
 input, textarea {
@@ -42,6 +43,17 @@ input, textarea {
     border-radius: 5px;
     font-size: 1em;
 }
+
+#checkbox-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5em; 
+    
+}
+#checkbox-section input[type="checkbox"] {
+    margin-right: 10px;
+}
+
 
 button {
     padding: 10px 15px;
