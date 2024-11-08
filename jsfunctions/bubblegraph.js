@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         const recipes = data.results.map(recipe => ({
             title: recipe.title,
             price: recipe.pricePerServing,
-            carbohydrates: recipe.nutrition ? recipe.nutrition.nutrients.find(n => n.name === 'Carbohydrates')?.amount || 0 : 0,
+            protein: recipe.nutrition ? recipe.nutrition.nutrients.find(n => n.name === 'Protein')?.amount || 0 : 0,  // Fetching protein data
             healthScore: recipe.healthScore
         }));
 
@@ -51,7 +51,7 @@ function createBubbleChart(data) {
         .range([50, width - 50]);
 
     const y = d3.scaleLinear()
-        .domain([0, d3.max(data, d => d.carbohydrates)])
+        .domain([0, d3.max(data, d => d.protein)])
         .range([height - 50, 50]);
 
     const size = d3.scaleSqrt()
@@ -62,14 +62,14 @@ function createBubbleChart(data) {
         .data(data)
         .enter().append("circle")
         .attr("cx", d => x(d.price))
-        .attr("cy", d => y(d.carbohydrates))
+        .attr("cy", d => y(d.protein))
         .attr("r", d => size(d.healthScore))
         .attr("fill", "#69b3a2")
         .attr("stroke", "#404040")
         .attr("stroke-width", 1.5)
         .on("mouseover", function(event, d) {
             tooltip.transition().duration(200).style("opacity", 1);
-            tooltip.html(`<strong>${d.title}</strong><br>Price: $${(d.price / 100).toFixed(2)}<br>Carbohydrates: ${d.carbohydrates}<br>Health Score: ${d.healthScore}`)
+            tooltip.html(`<strong>${d.title}</strong><br>Price: $${(d.price / 100).toFixed(2)}<br>Protein: ${d.protein}<br>Health Score: ${d.healthScore}`)
                 .style("left", (event.pageX + 10) + "px")
                 .style("top", (event.pageY - 28) + "px");
         })
@@ -96,5 +96,5 @@ function createBubbleChart(data) {
         .attr("y", -40)
         .attr("transform", "rotate(-90)")
         .attr("fill", "#000")
-        .text("Carbohydrates (g)");
+        .text("Protein (g)");
 }
