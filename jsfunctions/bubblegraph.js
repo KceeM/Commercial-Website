@@ -12,11 +12,13 @@ document.addEventListener('DOMContentLoaded', async function() {
         console.log(data.results);
         
         const recipes = data.results.map(recipe => {
-            const calories = recipe.nutrition ? recipe.nutrition.nutrients.find(n => n.name === 'Calories')?.amount || 0 : 0;
+            const protein = recipe.nutrition ? recipe.nutrition.nutrients.find(n => n.name === 'Protein')?.amount || 0 : 0;
+
+            console.log(`Title: ${recipe.title}, Protein: ${protein}`);
             return{  
                 title: recipe.title,
                 price: recipe.pricePerServing,
-                calories: calories,
+                protein: protein,
                 healthScore: recipe.healthScore
 
             }
@@ -55,7 +57,7 @@ function createBubbleChart(data) {
         .range([50, width - 50]);
 
     const y = d3.scaleLinear()
-        .domain([0, 1000])
+        .domain([0, d3.max(data, d => d.protein)])
         .range([height - 50, 50]);
 
     const size = d3.scaleSqrt()
@@ -100,5 +102,5 @@ function createBubbleChart(data) {
         .attr("y", -40)
         .attr("transform", "rotate(-90)")
         .attr("fill", "#000")
-        .text("Calories");
+        .text("Protein (g)");
 }
