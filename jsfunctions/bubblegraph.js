@@ -1,26 +1,55 @@
 document.addEventListener('DOMContentLoaded', async function() {
-    const apiKey = 'f5373f6c07d5410dac1a50e92c2aa8a7';  
+    const apiKey = 'bdbb0bfd273c475dba46e27d6673fdfd';  
 
     try {
-        const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?diet=vegetarian&number=10&addRecipeInformation=true&apiKey=${apiKey}`);
+        // Fetching vegetarian data
+        const vegetarianResponse = await fetch(`https://api.spoonacular.com/recipes/complexSearch?diet=vegetarian&number=15&addRecipeInformation=true&apiKey=${apiKey}`);
         
-        if (!response.ok) {
-            throw new Error("Failed to fetch data from Spoonacular API");
+        if (!vegetarianResponse.ok) {
+            throw new Error("Failed to fetch vegetarian data from Spoonacular API");
         }
 
-        const data = await response.json();
-        console.log(data.results);
+        const vegetarianData = await vegetarianResponse.json();
+        console.log(vegetarianData.results);
 
-        // Fetching carbohydrates data instead of protein
-        const recipes = data.results.map(recipe => ({
+        // Fetching meat data
+        const meatResponse = await fetch(`https://api.spoonacular.com/recipes/complexSearch?number=15&addRecipeInformation=true&apiKey=${apiKey}`);
+        
+        if (!meatResponse.ok) {
+            throw new Error("Failed to fetch meat data from Spoonacular API");
+        }
+
+        const meatData = await meatResponse.json();
+        console.log(meatData.results);
+
+        // Combining the data for both vegetarian and meat dishes
+        const vegetarianRecipes = vegetarianData.results.map(recipe => ({
             title: recipe.title,
             price: recipe.pricePerServing,
-            healthScore: recipe.healthScore || 0
-            
+            healthScore: recipe.healthScore || 0,
+            type: 'Vegetarian'
         }));
 
-        if (recipes.length > 0) {
-            createBubbleChart(recipes);
+        const meatRecipes = meatData.results.map(recipe => ({
+            title: recipe.title,
+            price: recipe.pricePerServing,
+            healthScore: recipe.healthScore || 0,
+            type: 'Meat'
+        }));
+
+        // Randomly match meat recipes to the number of vegetarian recipes
+        const selectedMeatRecipes = [];
+        for (let i = 0; i < vegetarianRecipes.length; i++) {
+            const randomIndex = Math.floor(Math.random() * meatRecipes.length);
+            selectedMeatRecipes.push(meatRecipes[randomIndex]);
+        }
+
+        // Merging the recipes (both vegetarian and meat)
+        const allRecipes = [...vegetarianRecipes, ...selectedMeatRecipes];
+
+
+        if (allRecipes.length > 0) {
+            createBubbleChart(allRecipes);
         } else {
             console.error("No valid data found.");
         }
@@ -36,7 +65,7 @@ function createBubbleChart(data) {
         .attr("width", width)
         .attr("height", height);
 
-    // tooltip
+    // Tooltip
     const tooltip = d3.select(".bubble-chart-container").append("section")
         .attr("class", "tooltip")
         .style("opacity", 0)
@@ -64,12 +93,12 @@ function createBubbleChart(data) {
         .attr("cx", d => x(d.price))
         .attr("cy", d => y(d.healthScore))
         .attr("r", d => size(d.healthScore))
-        .attr("fill", "#69b3a2")
+        .attr("fill", d => d.type === 'Vegetarian' ? "#69b3a2" : "#FF6347") // Different colours for Vegetarian and Meat
         .attr("stroke", "#404040")
         .attr("stroke-width", 1.5)
         .on("mouseover", function(event, d) {
             tooltip.transition().duration(200).style("opacity", 1);
-            tooltip.html(`<strong>${d.title}</strong><br>Price: $${(d.price / 100).toFixed(2)}<br>Health Score: ${d.healthScore}`)
+            tooltip.html(`<strong>${d.title}</strong><br>Price: $${(d.price / 100).toFixed(2)}<br>Health Score: ${d.healthScore}<br>Type: ${d.type === 'Vegetarian' ? 'Vegetarian' : 'Meat'}`)
                 .style("left", (event.pageX + 10) + "px")
                 .style("top", (event.pageY - 28) + "px");
         })
