@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         
 
         // Merging the recipes (both vegetarian and meat)
-        const allRecipes = [...vegetarianRecipes, ...selectedMeatRecipes];
+        allRecipes = [...vegetarianRecipes, ...selectedMeatRecipes];
 
         if (allRecipes.length > 0) {
             createBubbleChart(allRecipes);
