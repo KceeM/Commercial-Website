@@ -37,15 +37,9 @@ document.addEventListener('DOMContentLoaded', async function() {
             type: 'Meat'
         }));
 
-        // Randomly match meat recipes to the number of vegetarian recipes
-        const selectedMeatRecipes = [];
-        for (let i = 0; i < vegetarianRecipes.length; i++) {
-            const randomIndex = Math.floor(Math.random() * meatRecipes.length);
-            selectedMeatRecipes.push(meatRecipes[randomIndex]);
-        }
 
         // Merging the recipes (both vegetarian and meat)
-        const allRecipes = [...vegetarianRecipes, ...selectedMeatRecipes];
+        const allRecipes = [...vegetarianRecipes, ...meatRecipes];
 
 
         if (allRecipes.length > 0) {
