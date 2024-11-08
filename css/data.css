@@ -69,6 +69,7 @@ svg {
     
 }
 
+
 .vegans {
     background-color: greenyellow;
 }
@@ -82,6 +83,14 @@ svg {
     color: black; 
 }
 
+.vegetarian-recipes {
+    background-color: rgb(75, 159, 116);
+}
+
+.meat-recipes {
+    background-color: rgb(246, 91, 91);
+
+}
 .x-axis path,
 .y-axis path {
     display: block;
@@ -102,6 +111,11 @@ svg {
     margin: 50px auto;
     width: 80%;
     height: auto;
+}
+
+.bubble-chart-container {
+    margin-left: 350px;
+
 }
 
 .bar {
