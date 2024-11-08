@@ -10,13 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const blogPosts = d3.selectAll('.blog-post');
 
 
-    const apiKey = 'ef0323f5045049b28c111ce2a02c9687'; //API key from Spoonacular, attempted to use it for map & graphs
-
-    fetch(`https://api.spoonacular.com/food/products?apiKey=${apiKey}`)
-        .then(response => response.json())
-        .then(data => createMap(data.products)) 
-        .catch(error => console.error("Error loading product data:", error));
-
     //integration of the vegan vegetarian data and the svg data
     d3.xml("map.svg").then(function(data) {
         
