@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         // Fetching vegetarian data
         const vegetarianResponse = await fetch(`https://api.spoonacular.com/recipes/complexSearch?diet=vegetarian&number=15&addRecipeInformation=true&apiKey=${apiKey}`);
         
+        
         if (!vegetarianResponse.ok) {
             throw new Error("Failed to fetch vegetarian data from Spoonacular API");
         }
@@ -13,7 +14,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         console.log(vegetarianData.results);
 
         // Fetching meat data
-        const meatResponse = await fetch(`https://api.spoonacular.com/recipes/complexSearch?diet=omnivore&includeIngredients=beef,pork,chicken&number=15&addRecipeInformation=true&apiKey=${apiKey}`);
+        const meatResponse = await fetch(`https://api.spoonacular.com/recipes/complexSearch?includeIngredients=beef&number=15&addRecipeInformation=true&apiKey=${apiKey}`);
         
         if (!meatResponse.ok) {
             throw new Error("Failed to fetch meat data from Spoonacular API");
@@ -22,13 +23,17 @@ document.addEventListener('DOMContentLoaded', async function() {
         const meatData = await meatResponse.json();
         console.log(meatData.results);
 
-        // Combining the data for both vegetarian and meat dishes
-        const vegetarianRecipes = vegetarianData.results.map(recipe => ({
-            title: recipe.title,
-            price: recipe.pricePerServing,
-            healthScore: recipe.healthScore || 0,
-            type: 'Vegetarian'
-        }));
+        // Filtering out dessert recipes from vegetarian recipes
+        const vegetarianRecipes = vegetarianData.results.filter(recipe => 
+           !recipe.title.toLowerCase().includes("dessert") && 
+           !recipe.title.toLowerCase().includes("muffins") && 
+           !recipe.title.toLowerCase().includes("pie")
+        ).map(recipe => ({
+          title: recipe.title,
+          price: recipe.pricePerServing,
+          healthScore: recipe.healthScore || 0,
+          type: 'Vegetarian'
+}));
 
         const meatRecipes = meatData.results.map(recipe => ({
             title: recipe.title,
@@ -47,6 +52,8 @@ document.addEventListener('DOMContentLoaded', async function() {
                 type: 'Meat'    // Ensure 'type' is always set correctly
             });
         }
+
+        
 
         // Merging the recipes (both vegetarian and meat)
         const allRecipes = [...vegetarianRecipes, ...selectedMeatRecipes];
