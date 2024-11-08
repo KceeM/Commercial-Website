@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         console.log(vegetarianData.results);
 
         // Fetching meat data
-        const meatResponse = await fetch(`https://api.spoonacular.com/recipes/complexSearch?number=15&addRecipeInformation=true&apiKey=${apiKey}`);
+        const meatResponse = await fetch(`https://api.spoonacular.com/recipes/complexSearch?diet=omnivore&includeIngredients=beef,pork,chicken&number=15&addRecipeInformation=true&apiKey=${apiKey}`);
         
         if (!meatResponse.ok) {
             throw new Error("Failed to fetch meat data from Spoonacular API");
@@ -37,10 +37,19 @@ document.addEventListener('DOMContentLoaded', async function() {
             type: 'Meat'
         }));
 
+        // Randomly match meat recipes to the number of vegetarian recipes
+        const selectedMeatRecipes = [];
+        for (let i = 0; i < vegetarianRecipes.length; i++) {
+            const randomIndex = Math.floor(Math.random() * meatRecipes.length);
+            const meatRecipe = meatRecipes[randomIndex];
+            selectedMeatRecipes.push({
+                ...meatRecipe,
+                type: 'Meat'    // Ensure 'type' is always set correctly
+            });
+        }
 
         // Merging the recipes (both vegetarian and meat)
-        const allRecipes = [...vegetarianRecipes, ...meatRecipes];
-
+        const allRecipes = [...vegetarianRecipes, ...selectedMeatRecipes];
 
         if (allRecipes.length > 0) {
             createBubbleChart(allRecipes);
@@ -51,6 +60,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         console.error("Error fetching Spoonacular data:", error);
     }
 });
+
 
 function createBubbleChart(data) {
     const width = 800, height = 500;
