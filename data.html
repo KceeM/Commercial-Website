@@ -63,6 +63,31 @@
         <section id="tooltip2"></section>
 
         <section class="bubble-chart-container"></section>
+        <section id="filter-options">
+            <label><input type="checkbox" id="veganFilter" checked> Vegan</label>
+            <label><input type="checkbox" id="vegetarianFilter" checked> Vegetarian</label>
+            <label><input type="checkbox" id="meatFilter" checked> Meat</label>
+        </section>
+
+        <input type="text" id="ingredientSearch" placeholder="Search by ingredient">
+
+        <section>
+            <label for="healthScoreRange">Health Score:</label>
+            <input type="range" id="healthScoreRange" min="0" max="100" step="1" value="50">
+            <span id="healthScoreValue">50</span>
+        </section>
+        <section>
+            <label for="priceRange">Price per Serving:</label>
+            <input type="range" id="priceRange" min="0" max="5000" step="100" value="2500">
+            <span id="priceValue">2500</span>
+        </section>
+
+        <section id="comment-section">
+            <h3>Comments</h3>
+            <ul id="comments-list"></ul>
+            <textarea id="comment-input" placeholder="Add a comment..."></textarea>
+            <button id="add-comment">Submit</button>
+        </section>
 
 
         <p>Attempted to add this map graph. Went through some errors and I decided to leave it as is. I tried both API & manual Json data and it refused to work. The tooltip is not rendering on hover, but I am planning to fix it in the future as time ran out. </p>
@@ -87,5 +112,6 @@
     <script src="jsfunctions/linegraph.js"></script>
     <script src="jsfunctions/bargraph.js"></script>
     <script src="jsfunctions/bubblegraph.js"></script>
+    <script src="jsfunctions/bubbinteractivity.js"></script>
 </body>
 </html>

@@ -99,3 +99,4 @@ function createBarGraph(mealData) {
         .attr("transform", "rotate(-90)")
         .text("Price ($)");
 }
+

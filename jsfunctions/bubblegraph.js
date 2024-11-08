@@ -1,3 +1,5 @@
+let allRecipes = []; // Global declaration
+
 document.addEventListener('DOMContentLoaded', async function() {
     const apiKey = 'a729d41203b44872a07b2fa0c177359c';  
 
@@ -131,4 +133,49 @@ function createBubbleChart(data) {
         .attr("transform", "rotate(-90)")
         .attr("fill", "#000")
         .text("Health Score");
+}
+document.querySelectorAll('#filter-options input').forEach(input => {
+    input.addEventListener('change', () => {
+        const selectedTypes = Array.from(document.querySelectorAll('#filter-options input:checked')).map(el => el.id.replace('Filter', ''));
+        const filteredData = allRecipes.filter(recipe => selectedTypes.includes(recipe.type));
+        updateBubbleChart(filteredData);  
+    });
+});
+
+
+//Interaction elements that are added to my graph
+document.getElementById('healthScoreRange').addEventListener('input', event => {
+    const healthScoreThreshold = event.target.value;
+    document.getElementById('healthScoreValue').innerText = healthScoreThreshold;
+    const filteredData = allRecipes.filter(recipe => recipe.healthScore <= healthScoreThreshold);
+    updateBubbleChart(filteredData);
+});
+
+document.getElementById('priceRange').addEventListener('input', event => {
+    const priceThreshold = event.target.value;
+    document.getElementById('priceValue').innerText = priceThreshold;
+    const filteredData = allRecipes.filter(recipe => recipe.price <= priceThreshold);
+    updateBubbleChart(filteredData);
+});
+
+document.getElementById('ingredientSearch').addEventListener('input', event => {
+    const query = event.target.value.toLowerCase();
+    const filteredData = allRecipes.filter(recipe => recipe.title.toLowerCase().includes(query));
+    updateBubbleChart(filteredData);
+});
+
+document.getElementById('add-comment').addEventListener('click', () => {
+    const comment = document.getElementById('comment-input').value;
+    if (comment) {
+        const listItem = document.createElement('li');
+        listItem.textContent = comment;
+        document.getElementById('comments-list').appendChild(listItem);
+        document.getElementById('comment-input').value = '';
+    }
+});
+
+function updateBubbleChart(filteredData) {
+    const svg = d3.select(".bubble-chart-container svg");
+    svg.selectAll("circle").remove(); // Clear existing circles
+    createBubbleChart(filteredData);   // Redraw with new data
 }
