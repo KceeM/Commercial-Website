@@ -12,7 +12,9 @@ document.addEventListener('DOMContentLoaded', async function() {
         console.log(data.results);
         
         const recipes = data.results.map(recipe => {
-            const protein = recipe.nutrition ? recipe.nutrition.nutrients.find(n => n.name === 'Protein')?.amount || 0 : 0;
+            const protein = recipe.nutrition && recipe.nutrition.nutrients
+                 ? recipe.nutrition.nutrients.find(n => n.name === 'Protein')?.amount || 0 
+                 : 0;
 
             
             return{  
@@ -75,7 +77,7 @@ function createBubbleChart(data) {
         .attr("stroke-width", 1.5)
         .on("mouseover", function(event, d) {
             tooltip.transition().duration(200).style("opacity", 1);
-            tooltip.html(`<strong>${d.title}</strong><br>Price: $${(d.price / 100).toFixed(2)}<br>Protein: ${d.calories}<br>Health Score: ${d.healthScore}`)
+            tooltip.html(`<strong>${d.title}</strong><br>Price: $${(d.price / 100).toFixed(2)}<br>Protein: ${d.protein}<br>Health Score: ${d.healthScore}`)
                 .style("left", (event.pageX + 10) + "px")
                 .style("top", (event.pageY - 28) + "px");
         })
