@@ -9,12 +9,19 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
 
         const data = await response.json();
-        const recipes = data.results.map(recipe => ({
-            title: recipe.title,
-            price: recipe.pricePerServing,
-            calories: recipe.nutrition ? recipe.nutrition.nutrients.find(n => n.name === 'Calories')?.amount || 0 : 0,
-            healthScore: recipe.healthScore
-        }));
+        console.log(data.results);
+        
+        const recipes = data.results.map(recipe => {
+            const calories = recipe.nutrition ? recipe.nutrition.nutrients.find(n => n.name === 'Calories')?.amount || 0 : 0;
+            return{  
+                title: recipe.title,
+                price: recipe.pricePerServing,
+                calories: calories,
+                healthScore: recipe.healthScore
+
+            }
+            
+        });
 
         if (recipes.length > 0) {
             createBubbleChart(recipes);
@@ -48,7 +55,7 @@ function createBubbleChart(data) {
         .range([50, width - 50]);
 
     const y = d3.scaleLinear()
-        .domain([0, d3.max(data, d => d.calories)])
+        .domain([0, 1000])
         .range([height - 50, 50]);
 
     const size = d3.scaleSqrt()

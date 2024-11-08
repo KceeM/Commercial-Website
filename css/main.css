@@ -4,15 +4,16 @@ button {
     margin: 0 10px;
     font-size: 16px;
     cursor: pointer;
-    background-color: #baf2c4;
+    background-color: #46f26b;
     color: #000000;
     border: 2px solid #000000;
     transition: background-color 0.3s;
     font-family: 'Archivo Black';
+    border-radius: 10px;
 }
 
 button:hover {
-    background-color: #dc863f;
+    background-color: #ff8425;
     transform: scale(1.1);
 }
 
