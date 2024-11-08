@@ -114,25 +114,31 @@ function createBubbleChart(data) {
         });
 
     // x-axis
-    svg.append("g")
-        .attr("transform", `translate(0,${height - 50})`)
-        .call(d3.axisBottom(x).ticks(5))
-        .append("text")
-        .attr("x", width / 2)
-        .attr("y", 40)
-        .attr("fill", "#000")
-        .text("Price per Serving");
+    if (svg.selectAll(".x-axis").empty()) {
+        svg.append("g")
+            .attr("transform", `translate(0,${height - 50})`)
+            .call(d3.axisBottom(x).ticks(5))
+            .append("text")
+            .attr("x", width / 2)
+            .attr("y", 40)
+            .attr("fill", "#000")
+            .text("Price per Serving")
+            .classed("x-axis", true);
+    }
 
     // y-axis
-    svg.append("g")
-        .attr("transform", "translate(50, 0)")
-        .call(d3.axisLeft(y).ticks(5))
-        .append("text")
-        .attr("x", -height / 2)
-        .attr("y", -40)
-        .attr("transform", "rotate(-90)")
-        .attr("fill", "#000")
-        .text("Health Score");
+    if (svg.selectAll(".y-axis").empty()) {
+        svg.append("g")
+            .attr("transform", "translate(50, 0)")
+            .call(d3.axisLeft(y).ticks(5))
+            .append("text")
+            .attr("x", -height / 2)
+            .attr("y", -40)
+            .attr("transform", "rotate(-90)")
+            .attr("fill", "#000")
+            .text("Health Score")
+            .classed("y-axis", true);
+    }
 }
 document.querySelectorAll('#filter-options input').forEach(input => {
     input.addEventListener('change', () => {
@@ -176,6 +182,15 @@ document.getElementById('add-comment').addEventListener('click', () => {
 
 function updateBubbleChart(filteredData) {
     const svg = d3.select(".bubble-chart-container svg");
-    svg.selectAll("circle").remove(); // Clear existing circles
-    createBubbleChart(filteredData);   // Redraw with new data
+    const vegetarianVisible = document.getElementById('VegetarianFilter').checked;
+    const meatVisible = document.getElementById('MeatFilter').checked;
+
+    // Update the visibility of the circles based on the selected filters
+    svg.selectAll("circle")
+        .data(filteredData)
+        .attr("visibility", d => {
+            if (d.type === "Vegetarian" && !vegetarianVisible) return "hidden";
+            if (d.type === "Meat" && !meatVisible) return "hidden";
+            return "visible";
+        });
 }
