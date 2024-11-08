@@ -114,21 +114,14 @@ svg {
 }
 
 .bubble-chart-container {
-    margin-left: 350px;
+    margin-left: 300px;
 
 }
 
 .bar {
-    fill: steelblue;
+    fill: rgb(242, 157, 45);
 }
 
-.bar-sales {
-    fill: green;
-}
-
-.bar-forecast {
-    fill: orange;
-}
 
 .x-axis text, .y-axis text {
     font-size: 10px;

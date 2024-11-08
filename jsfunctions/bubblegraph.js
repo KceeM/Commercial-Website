@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 function createBubbleChart(data) {
     d3.select(".bubble-chart-container").select("svg").remove();
-    const width = 800, height = 500;
+    const width = 900, height = 600;
 
     const svg = d3.select(".bubble-chart-container").append("svg")
         .attr("width", width)

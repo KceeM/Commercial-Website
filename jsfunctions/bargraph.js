@@ -65,7 +65,7 @@ function createBarGraph(mealData) {
         .attr("y", d => y(d.price))
         .attr("width", x.bandwidth())
         .attr("height", d => height - y(d.price))
-        .attr("fill", "steelblue")
+        .attr("fill", "green")
         .on("mouseover", function(event, d) {
             tooltip.html(`Meal: ${d.name}<br>Price: $${d.price.toFixed(2)}`)
                 .style("visibility", "visible");
