@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', async function() {
-    const apiKey = 'bdbb0bfd273c475dba46e27d6673fdfd';  
+    const apiKey = 'a729d41203b44872a07b2fa0c177359c';  
 
     try {
         // Fetching vegetarian data
@@ -76,15 +76,9 @@ function createBubbleChart(data) {
         .attr("width", width)
         .attr("height", height);
 
-    // Tooltip
-    const tooltip = d3.select(".bubble-chart-container").append("section")
-        .attr("class", "tooltip")
-        .style("opacity", 0)
-        .style("position", "absolute")
-        .style("background", "#fff")
-        .style("padding", "8px")
-        .style("border-radius", "4px")
-        .style("box-shadow", "0px 0px 6px rgba(0, 0, 0, 0.3)");
+    
+    // Tooltip functionality
+    const tooltip = d3.select("#tooltip1");
 
     const x = d3.scaleLinear()
         .domain([0, d3.max(data, d => d.price)])
