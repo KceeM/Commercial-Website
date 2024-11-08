@@ -68,14 +68,14 @@ function createBubbleChart(data) {
         .data(data)
         .enter().append("circle")
         .attr("cx", d => x(d.price))
-        .attr("cy", d => y(d.calories))
+        .attr("cy", d => y(d.protein))
         .attr("r", d => size(d.healthScore))
         .attr("fill", "#69b3a2")
         .attr("stroke", "#404040")
         .attr("stroke-width", 1.5)
         .on("mouseover", function(event, d) {
             tooltip.transition().duration(200).style("opacity", 1);
-            tooltip.html(`<strong>${d.title}</strong><br>Price: $${(d.price / 100).toFixed(2)}<br>Calories: ${d.calories}<br>Health Score: ${d.healthScore}`)
+            tooltip.html(`<strong>${d.title}</strong><br>Price: $${(d.price / 100).toFixed(2)}<br>Protein: ${d.calories}<br>Health Score: ${d.healthScore}`)
                 .style("left", (event.pageX + 10) + "px")
                 .style("top", (event.pageY - 28) + "px");
         })
