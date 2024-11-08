@@ -1,7 +1,7 @@
 let allRecipes = []; // Global declaration
 
 document.addEventListener('DOMContentLoaded', async function() {
-    const apiKey = 'a729d41203b44872a07b2fa0c177359c';  
+    const apiKey = 'e42e2c2ee6f645438c5f3e68a37d31f3';  
 
     try {
         // Fetching vegetarian data
@@ -72,6 +72,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 
 function createBubbleChart(data) {
+    d3.select(".bubble-chart-container").select("svg").remove();
     const width = 800, height = 500;
 
     const svg = d3.select(".bubble-chart-container").append("svg")
@@ -96,50 +97,72 @@ function createBubbleChart(data) {
     // Get filter states
     const vegetarianVisible = document.getElementById('vegetarianFilter').checked;
     const meatVisible = document.getElementById('meatFilter').checked;
-    const defaultVisible = document.getElementById('defaultFilter').checked;
 
     svg.selectAll("circle")
-        .data(data)
-        .enter().append("circle")
-        .attr("cx", d => x(d.price))
-        .attr("cy", d => y(d.healthScore))
-        .attr("r", d => size(d.healthScore))
-        .attr("fill", d => {
-            if (defaultVisible) {
+    .data(data)
+    .join(
+        enter => enter.append("circle")
+            .attr("cx", d => x(d.price))
+            .attr("cy", d => y(d.healthScore))
+            .attr("r", d => size(d.healthScore))
+            .attr("fill", d => {
+                if (!vegetarianVisible && d.type === 'Vegetarian') {
+                    return "transparent"; // Hide vegetarian items if not visible
+                } else if (!meatVisible && d.type === 'Meat') {
+                    return "transparent"; // Hide meat items if not visible
+                }
                 return d.type === 'Vegetarian' ? "#69b3a2" : "#FF6347";
-            } else if (!vegetarianVisible && d.type === 'Vegetarian') {
-                return "#69b3a2";
-            } else if (!meatVisible && d.type === 'Meat') {
-                return "#FF6347";
-            } else if (vegetarianVisible && d.type === 'Vegetarian') {
-                return "#69b3a2";
-            } else if (meatVisible && d.type === 'Meat') {
-                return "#FF6347";
-            } else {
-                return "transparent";
-            }
-        })
-        .attr("opacity", d => {
-            if (defaultVisible) {
-                return 1; // Full opacity for both
-            } else if (!vegetarianVisible && d.type === 'Vegetarian') {
-                return 0.2; // Less opacity for vegetarian
-            } else if (!meatVisible && d.type === 'Meat') {
-                return 0.2; // Less opacity for meat
-            }
-            return 1; // Default opacity when both types are visible
-        })
-        .attr("stroke", "#404040")
-        .attr("stroke-width", 1.5)
-        .on("mouseover", function(event, d) {
-            tooltip.transition().duration(200).style("opacity", 1);
-            tooltip.html(`<strong>${d.title}</strong><br>Price: $${(d.price / 100).toFixed(2)}<br>Health Score: ${d.healthScore}<br>Type: ${d.type === 'Vegetarian' ? 'Vegetarian' : 'Meat'}`)
-                .style("left", (event.pageX + 10) + "px")
-                .style("top", (event.pageY - 28) + "px");
-        })
-        .on("mouseout", function() {
-            tooltip.transition().duration(500).style("opacity", 0);
-        });
+            })
+            .attr("opacity", d => {
+                if (!vegetarianVisible && d.type === 'Vegetarian') {
+                    return 0.2; // Less opacity for hidden vegetarian items
+                } else if (!meatVisible && d.type === 'Meat') {
+                    return 0.2; // Less opacity for hidden meat items
+                }
+                return 1; // Full opacity for visible items
+            })
+            .attr("stroke", "#404040")
+            .attr("stroke-width", 1.5)
+            .on("mouseover", function(event, d) {
+                d3.select(this)
+                   .transition()
+                   .duration(200)
+                   .attr("r", size(d.healthScore) * 1.3)  // Increase size
+                   .attr("fill", "yellow");  // Highlight color change
+
+                tooltip.transition().duration(200).style("opacity", 1);
+                tooltip.html(`<strong>${d.title}</strong><br>Price: $${(d.price / 100).toFixed(2)}<br>Health Score: ${d.healthScore}<br>Type: ${d.type === 'Vegetarian' ? 'Vegetarian' : 'Meat'}`)
+                    .style("left", (event.pageX + 10) + "px")
+                    .style("top", (event.pageY - 28) + "px");
+            })
+            .on("mouseout", function() {
+                d3.select(this)
+                    .transition()
+                    .duration(200)
+                    .attr("r", d => size(d.healthScore))  // Revert size
+                    .attr("fill", d => d.type === 'Vegetarian' ? "#69b3a2" : "#FF6347");  // Revert color
+                    
+                tooltip.transition().duration(500).style("opacity", 0);
+            }),
+        update => update
+            .attr("fill", d => {
+                if (!vegetarianVisible && d.type === 'Vegetarian') {
+                    return "transparent";
+                } else if (!meatVisible && d.type === 'Meat') {
+                    return "transparent";
+                }
+                return d.type === 'Vegetarian' ? "#69b3a2" : "#FF6347";
+            })
+            .attr("opacity", d => {
+                if (!vegetarianVisible && d.type === 'Vegetarian') {
+                    return 0.2;
+                } else if (!meatVisible && d.type === 'Meat') {
+                    return 0.2;
+                }
+                return 1;
+            }),
+        exit => exit.remove()
+    );
 
     // x-axis
     if (svg.selectAll(".x-axis").empty()) {
@@ -209,11 +232,10 @@ document.getElementById('add-comment').addEventListener('click', () => {
     }
 });
 
-document.querySelectorAll('#vegetarianFilter, #meatFilter, #defaultFilter').forEach(item => {
+document.querySelectorAll('#vegetarianFilter, #meatFilter').forEach(item => {
     item.addEventListener('input', () => {
         const vegetarianVisible = document.getElementById('vegetarianFilter').checked;
         const meatVisible = document.getElementById('meatFilter').checked;
-        const defaultVisible = document.getElementById('defaultFilter').checked;
 
         // Filtering data 
         const filteredData = allRecipes.filter(recipe => {

@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', async function() {
     try {
-        const apiKey = 'e383cda1a82a42d1a4eb3acafa246466';  
+        const apiKey = 'fa03e35e013841d6afca8cc47398e090';  
         const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?diet=vegetarian&number=5&addRecipeInformation=true&apiKey=${apiKey}`);
         
         if (!response.ok) {

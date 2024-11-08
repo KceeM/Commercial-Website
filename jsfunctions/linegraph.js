@@ -4,7 +4,7 @@ function getRandomHealthScore() {
 
 document.addEventListener('DOMContentLoaded', async function() {
     try {
-        const response = await fetch("https://api.spoonacular.com/recipes/complexSearch?diet=vegan&number=30&apiKey=b2cb30794d014fe595b6f84ff7a1f97a"); // Fetch more recipes
+        const response = await fetch("https://api.spoonacular.com/recipes/complexSearch?diet=vegan&number=30&apiKey=82215677dd504cb5a78d42648f50267f"); // Fetch more recipes
         const data = await response.json();
 
         // Process the recipes
