@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         const recipes = data.results.map(recipe => {
             const protein = recipe.nutrition ? recipe.nutrition.nutrients.find(n => n.name === 'Protein')?.amount || 0 : 0;
 
-            console.log(`Title: ${recipe.title}, Protein: ${protein}`);
+            
             return{  
                 title: recipe.title,
                 price: recipe.pricePerServing,
