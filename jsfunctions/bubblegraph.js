@@ -78,7 +78,6 @@ function createBubbleChart(data) {
         .attr("width", width)
         .attr("height", height);
 
-    
     // Tooltip functionality
     const tooltip = d3.select("#tooltip1");
 
@@ -94,13 +93,42 @@ function createBubbleChart(data) {
         .domain([0, d3.max(data, d => d.healthScore)])
         .range([10, 50]);
 
+    // Get filter states
+    const vegetarianVisible = document.getElementById('vegetarianFilter').checked;
+    const meatVisible = document.getElementById('meatFilter').checked;
+    const defaultVisible = document.getElementById('defaultFilter').checked;
+
     svg.selectAll("circle")
         .data(data)
         .enter().append("circle")
         .attr("cx", d => x(d.price))
         .attr("cy", d => y(d.healthScore))
         .attr("r", d => size(d.healthScore))
-        .attr("fill", d => d.type === 'Vegetarian' ? "#69b3a2" : "#FF6347") // Different colours for Vegetarian and Meat
+        .attr("fill", d => {
+            if (defaultVisible) {
+                return d.type === 'Vegetarian' ? "#69b3a2" : "#FF6347";
+            } else if (!vegetarianVisible && d.type === 'Vegetarian') {
+                return "#69b3a2";
+            } else if (!meatVisible && d.type === 'Meat') {
+                return "#FF6347";
+            } else if (vegetarianVisible && d.type === 'Vegetarian') {
+                return "#69b3a2";
+            } else if (meatVisible && d.type === 'Meat') {
+                return "#FF6347";
+            } else {
+                return "transparent";
+            }
+        })
+        .attr("opacity", d => {
+            if (defaultVisible) {
+                return 1; // Full opacity for both
+            } else if (!vegetarianVisible && d.type === 'Vegetarian') {
+                return 0.2; // Less opacity for vegetarian
+            } else if (!meatVisible && d.type === 'Meat') {
+                return 0.2; // Less opacity for meat
+            }
+            return 1; // Default opacity when both types are visible
+        })
         .attr("stroke", "#404040")
         .attr("stroke-width", 1.5)
         .on("mouseover", function(event, d) {
@@ -140,6 +168,7 @@ function createBubbleChart(data) {
             .classed("y-axis", true);
     }
 }
+
 document.querySelectorAll('#filter-options input').forEach(input => {
     input.addEventListener('change', () => {
         const selectedTypes = Array.from(document.querySelectorAll('#filter-options input:checked')).map(el => el.id.replace('Filter', ''));
@@ -180,17 +209,21 @@ document.getElementById('add-comment').addEventListener('click', () => {
     }
 });
 
-function updateBubbleChart(filteredData) {
-    const svg = d3.select(".bubble-chart-container svg");
-    const vegetarianVisible = document.getElementById('VegetarianFilter').checked;
-    const meatVisible = document.getElementById('MeatFilter').checked;
+document.querySelectorAll('#vegetarianFilter, #meatFilter, #defaultFilter').forEach(item => {
+    item.addEventListener('input', () => {
+        const vegetarianVisible = document.getElementById('vegetarianFilter').checked;
+        const meatVisible = document.getElementById('meatFilter').checked;
+        const defaultVisible = document.getElementById('defaultFilter').checked;
 
-    // Update the visibility of the circles based on the selected filters
-    svg.selectAll("circle")
-        .data(filteredData)
-        .attr("visibility", d => {
-            if (d.type === "Vegetarian" && !vegetarianVisible) return "hidden";
-            if (d.type === "Meat" && !meatVisible) return "hidden";
-            return "visible";
+        // Filtering data 
+        const filteredData = allRecipes.filter(recipe => {
+            if (!vegetarianVisible && recipe.type === 'Vegetarian') return false;
+            if (!meatVisible && recipe.type === 'Meat') return false;
+            return true;
         });
-}
+
+        
+        createBubbleChart(filteredData);
+    });
+});
+
