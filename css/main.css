@@ -4,16 +4,16 @@ button {
     margin: 0 10px;
     font-size: 16px;
     cursor: pointer;
-    background-color: #46f26b;
-    color: #000000;
-    border: 2px solid #000000;
+    background-color: #2E8B57;
+    color: #ffffff;
+    border: 2px solid #2E8B57;
     transition: background-color 0.3s;
-    font-family: 'Archivo Black';
+    font-family: 'Poppins';
     border-radius: 10px;
 }
 
 button:hover {
-    background-color: #ff8425;
+    background-color: #8BC34A;
     transform: scale(1.1);
 }
 
@@ -47,7 +47,7 @@ header .logo {
     position: relative;
     width: 100%;
     height: 200px; 
-    background-color: #46f26b;
+    background-color: #2E8B57;
     background-size: cover;
     background-position: center;
 }
@@ -60,7 +60,7 @@ header .logo {
     transform: translate(-50%, -50%);
     color: white;
     font-size: 4em; 
-    font-family: 'Arial', sans-serif; 
+    font-family: 'Poppins', sans-serif; 
     text-shadow: 
         -2px -2px 0 #000,  /*This shifts the shadow 2px to the top-left*/
          2px -2px 0 #000,  /*This shifts the shadow 2px to the top-right*/
@@ -69,11 +69,14 @@ header .logo {
 } 
 
 footer {
-    background-color: #46f26b;
-    color: #575555;
+    background-color: #2E8B57;
+    color: #ffffff;
     text-align: center;
     padding: 40px 0;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 footer .container {
@@ -89,16 +92,11 @@ footer .footer-content {
 }
 
 
-footer .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 
 footer .footer-content {
     font-size: 18px;
     
-    font-family: 'Roboto';
+    font-family: 'Poppins';
 }
 
 footer .social-links {
@@ -114,7 +112,7 @@ footer .social-links li {
 }
 
 footer .social-links li a {
-    color: #4f4f4f;
+    color: #ffffff;
     text-decoration: none;
     font-size: 18px;
     font-family: 'Quicksand';
@@ -124,4 +122,48 @@ footer .social-links li a:hover {
     text-decoration: underline;
 }
 
+/* for tablets */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; 
+        align-items: center; 
+    }
 
+    button {
+        width: 80%; 
+        font-size: 14px; 
+        padding: 8px 15px; 
+    }
+
+    header .logo img {
+        max-width: 150px; 
+    }
+
+    #heading-text {
+        font-size: 2.5em; 
+        text-align: center; 
+    }
+}
+
+/* mobile devices */
+@media (max-width: 480px) {
+    .container {
+        padding: 10px; 
+    }
+
+    button {
+        width: 100%; 
+        margin: 10px 0; 
+        padding: 10px; 
+    }
+
+    footer {
+        padding: 20px; 
+        font-size: 14px; 
+    }
+
+    footer .social-links {
+        flex-wrap: wrap; 
+        justify-content: center; 
+    }
+}

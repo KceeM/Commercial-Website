@@ -12,7 +12,7 @@
     <header>
         <section class="container">
             <section class="logo">
-                <img src="images/V4.png" alt="My Website Logo">
+                <img src="images/V2.png" alt="My Website Logo">
             </section>
 
             <nav>
@@ -30,13 +30,13 @@
     </header>
 
     <section class="intro-section1">
-        <h2>Welcome to Our Plant-Based Community!</h2>
+        <h2>Join Our Plantful Community!</h2>
         <p>Register with us to receive personalized updates on the vegetarian and vegan lifestyle. Enjoy exclusive recipes, data insights, blog highlights, and more!</p>
         <p>Creating an account is quick and easy. Let's make a difference together!</p>
     </section>
 
     <section class="contact-section">
-        <h2>Join the Community</h2>
+        <h2>Registration Form</h2>
         <form id="contactForm" novalidate>
             <fieldset>
                 <legend>Personal Information</legend>
@@ -55,7 +55,7 @@
             </fieldset>
     
             <fieldset>
-                <legend>Account Information</legend>
+                <legend>Secure your account</legend>
     
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" aria-describedby="passwordError" required>
@@ -89,17 +89,28 @@
               </fieldset>
             
             <fieldset>  
-                <legend>Message</legend>
+                <legend>Feel free to leave a message</legend>
     
                 <label for="message">Message:</label>
                 <textarea id="message" name="message" aria-describedby="messageError" maxlength="250" required></textarea>
                 <p class="error" id="messageError">Message should be under 250 characters.</p>
             </fieldset>
     
-            <button type="submit">Submit</button>
+            <button class="button-form" type="submit">Submit</button>
             <p id="successMessage" class="success">Your message has been successfully sent!</p>
         </form>
     </section>
+
+    <footer>
+        <section class="container">
+            <p class="footer-content">&copy; 2024 The Vegan Vitality. All rights reserved.</p>
+            <ul class="social-links">
+                <li><a href="#">Instagram</a></li>
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">LinkedIn</a></li>
+            </ul>
+        </section>
+    </footer>
     
     <script src="jsfunctions/form.js"></script>
     <script src="jsfunctions/function.js"></script>

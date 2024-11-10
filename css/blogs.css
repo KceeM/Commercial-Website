@@ -1,23 +1,23 @@
 
 
 .blog-post {
-    width: 70%; 
+    width: 80%; 
     margin: 0 auto;
     margin-bottom: 30px; 
-    background-color: #fff4d7; 
-    border: 2px solid #88f564; 
+    background-color: #defbbd; 
+    border: 2px solid #2E8B57; 
     box-sizing: border-box;
     padding: 20px;
     border-radius: 30px;
-    font-family: 'Roboto';
-    margin-top: 50px;
+    font-family: 'Poppins', sans-serif;;
+    margin-top: 100px;
     
 }
 
 .blog-title {
     font-size: 30px;
     margin-bottom: 10px;
-    font-family: 'Roboto';
+    font-family: 'Poppins', sans-serif;
 }
 
 .blog-date {
@@ -29,7 +29,7 @@
 .blog-content {
     line-height: 1.6;
     font-size: 20px;
-    font-family: 'Roboto'; 
+    font-family: 'Poppins', sans-serif;; 
 }
 
 .blog-image {
@@ -44,7 +44,7 @@
     font-size: 25px; 
     font-weight: bold; 
     margin-top: 20px; 
-    font-family: 'Roboto';
+    font-family: 'Poppins', sans-serif;
 }
 
 .extra-content {
