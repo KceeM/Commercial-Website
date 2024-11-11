@@ -96,3 +96,51 @@ input, textarea {
     text-align: center;
     display: none;
 }
+
+@media (max-width: 768px) {
+    .contact-section {
+        padding: 15px;
+        margin: 20px auto;
+    }
+
+    .contact-section h2, .intro-section1 h2 {
+        font-size: 30px;
+    }
+
+    form {
+        gap: 15px;
+    }
+
+    input, textarea {
+        font-size: 1.2em;
+    }
+
+    .button-form {
+        width: 100%;
+        padding: 12px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .contact-section {
+        padding: 15px;
+        margin: 20px auto;
+    }
+
+    .contact-section h2, .intro-section1 h2 {
+        font-size: 30px;
+    }
+
+    form {
+        gap: 15px;
+    }
+
+    input, textarea {
+        font-size: 1.2em;
+    }
+
+    .button-form {
+        width: 100%;
+        padding: 12px;
+    }
+}

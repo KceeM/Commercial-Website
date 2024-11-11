@@ -52,3 +52,46 @@ li {
     font-family: 'Roboto', sans-serif;
     padding: 10px;
 }
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .article-container {
+        padding: 15px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    .essay-image, .essay-image2 {
+        height: auto;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    p, ul, li {
+        font-size: 18px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .article-container {
+        padding: 10px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .essay-image, .essay-image2 {
+        height: auto;
+        max-width: 100%;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    p, ul, li {
+        font-size: 16px;
+    }
+}

@@ -162,3 +162,87 @@ svg {
     z-index: 10;
 
 }
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .intro-section {
+        flex-direction: column;
+        text-align: center;
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+
+    .intro-text {
+        padding-left: 20px;
+        font-size: 1.5rem;
+    }
+
+    #map-container,
+    #bar-graph-container,
+    .bubble-chart-container {
+        margin-left: 0;
+        width: 100%;
+        max-width: 600px;
+        height: auto;
+    }
+
+    .line,
+    .bar {
+        stroke-width: 1px; 
+    }
+
+    .tooltip {
+        font-size: 10px;
+        padding: 1px;
+        width: auto;
+        height: auto;
+    }
+
+    #tooltip1, #tooltip2 {
+        font-size: 12px;
+        padding: 5px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .intro-section {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .intro-text {
+        font-size: 1.2rem;
+        padding-left: 10px;
+    }
+
+    .graph-container,
+    .line-graph-container,
+    #map-container,
+    #bar-graph-container,
+    .bubble-chart-container {
+        margin: 0 auto;
+        width: 100%;
+        height: auto;
+        padding: 10px;
+    }
+
+    .key-box {
+        width: 15px;
+        height: 10px;
+    }
+
+    .tooltip, 
+    #tooltip1, 
+    #tooltip2 {
+        font-size: 10px;
+    }
+
+    .x-axis text, .y-axis text {
+        font-size: 8px;
+    }
+
+    p, .label, .key-item {
+        font-size: 12px;
+    }
+}

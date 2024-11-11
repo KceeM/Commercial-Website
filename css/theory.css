@@ -38,3 +38,12 @@ li {
     font-family: 'Roboto', sans-serif;
     padding: 10px;
 }
+
+@media (max-width: 600px) {
+    .article-container {
+        padding: 15px;
+    }
+    p, ul, li {
+        padding: 20px;
+    }
+}

@@ -51,3 +51,67 @@
     display: none;
 }
 
+/* Tablet responsiveness */
+@media (max-width: 1024px) {
+    .blog-title {
+        font-size: 26px;
+        margin-bottom: 8px;
+    }
+
+    .blog-date {
+        font-size: 14px;
+    }
+
+    .blog-content {
+        font-size: 18px;
+        line-height: 1.5;
+    }
+
+    .blog-image {
+        height: auto; 
+        margin-bottom: 15px;
+    }
+
+    .blog-subheading {
+        font-size: 22px;
+        margin-top: 15px;
+    }
+
+    .extra-content {
+        display: block; 
+    }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .blog-title {
+        font-size: 22px;
+        margin-bottom: 8px;
+    }
+
+    .blog-date {
+        font-size: 12px;
+        margin-bottom: 5px;
+    }
+
+    .blog-content {
+        font-size: 16px;
+        line-height: 1.4;
+    }
+
+    .blog-image {
+        width: 100%;
+        height: auto; 
+        margin-bottom: 10px;
+    }
+
+    .blog-subheading {
+        font-size: 20px;
+        margin-top: 10px;
+    }
+
+    .extra-content {
+        display: none; 
+    }
+}
+

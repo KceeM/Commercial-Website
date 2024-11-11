@@ -98,5 +98,21 @@ p {
     background-color: #feeb5d;
 }
 
+@media (max-width: 600px) {
+    .recipe-card, .product-card {
+        width: 100%;
+        max-width: 350px;
+    }
+
+    #recipes-container, .products-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    p, h2, button {
+        font-size: 0.9em;
+    }
+}
+
 
 
